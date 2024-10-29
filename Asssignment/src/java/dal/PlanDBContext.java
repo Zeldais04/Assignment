@@ -1,40 +1,37 @@
 
 package dal;
 import java.util.ArrayList;
-import model.accesscontrol.*;
+import model.*;
 
 /**
  * Daitqhe182481
  * @author Zeldais
  */
-public class UserDBContext extends DBContext<User>{
+public class PlanDBContext extends DBContext<Plan>{
 
     @Override
-    public void insert(User model) {
+    public void insert(Plan model) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void update(User model) {
+    public void update(Plan model) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void delete(User model) {
+    public void delete(Plan model) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public ArrayList<User> list() {
+    public ArrayList<Plan> list() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public User get(int id) {
+    public Plan get(int id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
-    
-
-    
+ 
 }

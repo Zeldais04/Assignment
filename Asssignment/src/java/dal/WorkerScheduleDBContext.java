@@ -1,40 +1,37 @@
 
 package dal;
 import java.util.ArrayList;
-import model.accesscontrol.*;
+import model.*;
 
 /**
  * Daitqhe182481
  * @author Zeldais
  */
-public class UserDBContext extends DBContext<User>{
+public class WorkerScheduleDBContext  extends DBContext<WokerSchedule> {
 
     @Override
-    public void insert(User model) {
+    public void insert(WokerSchedule model) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void update(User model) {
+    public void update(WokerSchedule model) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void delete(User model) {
+    public void delete(WokerSchedule model) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public ArrayList<User> list() {
+    public ArrayList<WokerSchedule> list() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public User get(int id) {
+    public WokerSchedule get(int id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    
-
-    
 }
