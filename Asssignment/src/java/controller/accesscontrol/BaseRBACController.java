@@ -16,7 +16,7 @@ import model.accesscontrol.*;
 public abstract class BaseRBACController extends BaseRequiredAuthenticationController {
 
     private boolean isAuthorized(HttpServletRequest req, User loggeduser) {
-        
+        return true;
     }
 
     protected abstract void doAuthorizedGet(HttpServletRequest req, HttpServletResponse resp, User loggeduser) throws ServletException, IOException;

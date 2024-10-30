@@ -8,7 +8,7 @@ import java.sql.Date;
  */
 public class Schedule {
   private int id;
-    private PlanCampaign cam;
+    private PlanCampain cam;
     private Date date;
     private String shift;
     private int quantity;
@@ -21,11 +21,11 @@ public class Schedule {
         this.id = id;
     }
 
-    public PlanCampaign getCam() {
+    public PlanCampain getCam() {
         return cam;
     }
 
-    public void setCam(PlanCampaign cam) {
+    public void setCam(PlanCampain cam) {
         this.cam = cam;
     }
 

@@ -1,6 +1,8 @@
 package model;
 
 import java.sql.Date;
+import java.util.ArrayList;
+
 /**
  * Daitqhe182481
  *
@@ -12,6 +14,16 @@ public class Plan {
     private Date startTime;
     private Date endTime;
     private Department d;
+    private ArrayList<PlanCampain> campains = new ArrayList<>();
+
+    public ArrayList<PlanCampain> getCampains() {
+        return campains;
+    }
+
+    public void setCampains(ArrayList<PlanCampain> campains) {
+        this.campains = campains;
+    }
+    
 
     public int getId() {
         return id;
@@ -44,5 +56,5 @@ public class Plan {
     public void setD(Department d) {
         this.d = d;
     }
-    
+
 }

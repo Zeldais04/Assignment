@@ -5,7 +5,7 @@ package model;
  * Daitqhe182481
  * @author Zeldais
  */
-public class PlanCampaign {
+public class PlanCampain {
 private int id;
     private Plan pl;
     private Product p;
