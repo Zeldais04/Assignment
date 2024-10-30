@@ -1,15 +1,28 @@
-
 package model.accesscontrol;
+
+import java.util.ArrayList;
 
 /**
  * Daitqhe182481
+ *
  * @author Zeldais
  */
 public class User {
+
     private int id;
     private String name;
     private String password;
     private String displayName;
+    private ArrayList<Role> roles = new ArrayList<>();
+
+    public ArrayList<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(ArrayList<Role> roles) {
+        this.roles = roles;
+    }
+    
 
     public int getId() {
         return id;
