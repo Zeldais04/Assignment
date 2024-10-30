@@ -22,7 +22,7 @@ public class DepartmentDBContext extends DBContext<Department> {
                      SELECT [did]
                            ,[dname]
                            ,[dtype]
-                       FROM [Department]
+                       FROM [Dept]
                        WHERE dtype = ?""";
         PreparedStatement stm = null;
         try {
@@ -70,7 +70,7 @@ public class DepartmentDBContext extends DBContext<Department> {
         ArrayList<Department> depts = new ArrayList<>();
         PreparedStatement stm = null;
         try {
-            String sql = "SELECT did,dname FROM Department";
+            String sql = "SELECT did,dname FROM Dept";
 
             stm = connection.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
