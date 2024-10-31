@@ -96,21 +96,19 @@ public class PlanDBContext extends DBContext<Plan> {
         ArrayList<Plan> plans = new ArrayList<>();
         try {
             String sql = "SELECT [plid], [startTime], [endTime], [did] FROM [Plan]";
-            PreparedStatement stm = connection.prepareStatement(sql);
-            ResultSet rs = stm.executeQuery();
-            while (rs.next()) {
-                Plan plan = new Plan();
-                plan.setId(rs.getInt("plid"));
-                plan.setStartTime(rs.getDate("startTime"));
-                plan.setEndTime(rs.getDate("endTime"));
-                // Set department or other related objects here if needed
-                plans.add(plan);
+            try (PreparedStatement stm = connection.prepareStatement(sql); ResultSet rs = stm.executeQuery()) {
+                while (rs.next()) {
+                    Plan plan = new Plan();
+                    plan.setId(rs.getInt("plid"));
+                    plan.setStartTime(rs.getDate("startTime"));
+                    plan.setEndTime(rs.getDate("endTime"));
+                    // Set department or other related objects here if needed
+                    plans.add(plan);
+                }
             }
-            rs.close();
-            stm.close();
         } catch (SQLException ex) {
             Logger.getLogger(PlanDBContext.class.getName()).log(Level.SEVERE, null, ex);
-        }finally{
+        } finally {
             try {
                 connection.close();
             } catch (SQLException ex) {
@@ -122,7 +120,31 @@ public class PlanDBContext extends DBContext<Plan> {
 
     @Override
     public Plan get(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+        Plan plan = null;
+        try {
+            String sql = "SELECT [plid], [startTime], [endTime], [did] FROM [Plan] WHERE [plid] = ?";
+            try (PreparedStatement stm = connection.prepareStatement(sql)) {
+                stm.setInt(1, id);
+                try (ResultSet rs = stm.executeQuery()) {
+                    if (rs.next()) {
+                        plan = new Plan();
+                        plan.setId(rs.getInt("plid"));
+                        plan.setStartTime(rs.getDate("startTime"));
+                        plan.setEndTime(rs.getDate("endTime"));
+                        // Thiết lập các thuộc tính khác nếu cần
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PlanDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(PlanDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return plan;
 
+    }
 }

@@ -22,7 +22,7 @@
     </servlet>
     <servlet>
         <servlet-name>PlanCampainListController</servlet-name>
-        <servlet-class>controller.productionplan.PlanCampainListController</servlet-class>
+        <servlet-class>controller.plancampain.PlanCampainListController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ProductionPlanCreateController</servlet-name>
