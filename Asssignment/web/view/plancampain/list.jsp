@@ -62,6 +62,17 @@
                 border-radius: 5px;
                 margin-bottom: 20px;
             }
+            .back-button {
+                display: inline-block;
+                padding: 10px 20px;
+                font-size: 16px;
+                text-align: center;
+                background-color: #4CAF50;
+                color: white;
+                text-decoration: none;
+                border-radius: 5px;
+                margin-bottom: 20px;
+            }
             .back-button:hover {
                 background-color: #45a049;
             }
@@ -69,10 +80,28 @@
                 text-align: right;
                 margin-bottom: 20px;
             }
+            .details {
+                justify-content: center;
+                text-align: center;
+                margin-bottom: 20px;
+            }
         </style>
     </head>
     <body>
         <h1>Danh sách Chiến Dịch Sản Xuất của Kế Hoạch ${planId}</h1>
+
+        <!-- Nút trở về trang trước, căn sang bên phải -->
+        <div class="button-container">
+            <a href="${pageContext.request.contextPath}/productionplan/list" class="back-button">Trở về</a>
+        </div>
+
+        <!-- Hiển thị thông tin chi tiết về thời gian của kế hoạch sản xuất -->
+        <div class="details">
+            <p><strong>Thời gian bắt đầu:</strong> <c:out value="${plan.startTime}"/>
+               <strong>Thời gian kết thúc:</strong> <c:out value="${plan.endTime}"/></p>
+
+        </div>
+
         <div class="table-container">
             <table>
                 <thead>
@@ -87,7 +116,9 @@
                     <c:forEach var="campaign" items="${campaigns}">
                         <tr>
                             <td><c:out value="${campaign.id}"/></td>
-                            <td><c:out value="${campaign.p.name}"/></td>
+                            <td>
+                                <c:out value="${campaign.p.name}"/> 
+                            </td>
                             <td><c:out value="${campaign.quantity}"/></td>
                             <td><c:out value="${campaign.effort}"/></td>
                         </tr>
@@ -95,9 +126,6 @@
                 </tbody>
             </table>
         </div>
-        <br/>
-        <div class="button-container">
-            <a href="${pageContext.request.contextPath}/productionplan/list" class="back-button">Trở về</a>
-        </div>    </body>
+    </body>
 </html>
 

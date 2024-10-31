@@ -64,6 +64,7 @@ public class PlanCampaignDBContext extends DBContext<PlanCampain> {
 
                         // Thêm chiến dịch vào danh sách
                         campaigns.add(campaign);
+                        connection.commit();
                     }
                 }
             }
