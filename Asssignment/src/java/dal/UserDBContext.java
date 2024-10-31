@@ -19,7 +19,7 @@ public class UserDBContext extends DBContext<User> {
         ArrayList<Role> roles = new ArrayList<>();
         String sql = """
                      SELECT r.rid,r.rname,f.fid,f.fname,f.url FROM [User] u 
-                     \tINNER JOIN UserRole ur ON ur.username = u.username
+                     \tINNER JOIN UserRole ur ON ur.username = u.uname
                      \tINNER JOIN [Role] r ON r.rid = ur.rid
                      \tINNER JOIN RoleFeature rf ON rf.rid = r.rid
                      \tINNER JOIN Feature f ON f.fid = rf.fid
@@ -65,9 +65,9 @@ public class UserDBContext extends DBContext<User> {
 
     public User get(String username, String password) {
         String sql = """
-                     SELECT [username]
+                     SELECT [uname]
                          ,[password]
-                         ,[displayname]
+                         ,[displayName]
                      FROM [User]
                      WHERE username = ? AND [password] = ?""";
 
@@ -80,7 +80,7 @@ public class UserDBContext extends DBContext<User> {
             ResultSet rs = stm.executeQuery();
             if (rs.next()) {
                 user = new User();
-                user.setDisplayName(rs.getString("displayname"));
+                user.setDisplayName(rs.getString("displayName"));
                 user.setName(username);
             }
         } catch (SQLException ex) {

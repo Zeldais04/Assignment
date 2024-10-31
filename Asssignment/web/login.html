@@ -4,12 +4,61 @@
         <title>Login</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+        <style>
+            body {
+                font-family: 'Roboto', sans-serif;
+                background-color: #f0f0f0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                margin: 0;
+            }
+            .login-container {
+                background-color: #ffffff;
+                padding: 40px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                border-radius: 8px;
+                width: 300px;
+                text-align: center;
+            }
+            .login-container h2 {
+                margin-bottom: 20px;
+                color: #333;
+            }
+            .login-container input[type="text"],
+            .login-container input[type="password"] {
+                width: calc(100% - 20px);
+                padding: 10px;
+                margin: 10px 0;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+            }
+            .login-container input[type="submit"] {
+                width: 100%;
+                padding: 10px;
+                background-color: #007bff;
+                color: #ffffff;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                font-weight: bold;
+                transition: background-color 0.3s;
+            }
+            .login-container input[type="submit"]:hover {
+                background-color: #0056b3;
+            }
+        </style>
     </head>
     <body>
-        <form action="login" method="POST">
-            username: <input type="text" name="username"/> <br/>
-            password: <input type="password" name="password"/> <br/>
-            <input type="submit" value="Login" />
-        </form>
+        <div class="login-container">
+            <h2>Login</h2>
+            <form action="login" method="POST">
+                <input type="text" name="username" placeholder="Username" required/> <br/>
+                <input type="password" name="password" placeholder="Password" required/> <br/>
+                <input type="submit" value="Login" />
+            </form>
+        </div>
     </body>
 </html>
