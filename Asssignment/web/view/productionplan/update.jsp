@@ -9,81 +9,72 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Chỉnh sửa Kế Hoạch và Chiến Dịch Sản Xuất</title>
+    <title>Chỉnh Sửa Kế Hoạch Sản Xuất</title>
     <style>
-        /* CSS tương tự các trang khác để tạo sự đồng nhất */
+        /* CSS cơ bản cho form */
         .form-container {
-            width: 80%;
+            width: 50%;
             margin: 0 auto;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            background-color: #f4f6f9;
             padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-        .form-title {
-            text-align: center;
-            margin-bottom: 20px;
-            font-size: 24px;
-        }
-        .form-field {
-            margin-bottom: 15px;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-        }
-        input[type="text"], input[type="date"], input[type="number"] {
+        input[type="text"], input[type="date"], input[type="number"], select {
             width: 100%;
             padding: 10px;
-            font-size: 16px;
+            margin: 8px 0;
+            display: inline-block;
             border: 1px solid #ccc;
             border-radius: 4px;
+            box-sizing: border-box;
         }
-        .submit-button {
-            display: block;
+        input[type="submit"] {
             width: 100%;
-            padding: 10px;
             background-color: #4CAF50;
             color: white;
-            font-size: 16px;
+            padding: 14px 20px;
+            margin: 8px 0;
             border: none;
             border-radius: 4px;
             cursor: pointer;
         }
-        .submit-button:hover {
+        input[type="submit"]:hover {
             background-color: #45a049;
         }
     </style>
 </head>
 <body>
+    <h2>Chỉnh Sửa Kế Hoạch Sản Xuất</h2>
     <div class="form-container">
-        <h1 class="form-title">Chỉnh sửa Kế Hoạch và Chiến Dịch Sản Xuất</h1>
-        <form action="update" method="get">
+        <form action="${pageContext.request.contextPath}/productionplan/update" method="post">
             <input type="hidden" name="planId" value="${plan.id}"/>
             
-            <!-- Chỉnh sửa thông tin kế hoạch -->
-            <div class="form-field">
-                <label for="startDate">Ngày Bắt Đầu</label>
-                <input type="date" id="startDate" name="startDate" value="${plan.startTime}"/>
-            </div>
-            <div class="form-field">
-                <label for="endDate">Ngày Kết Thúc</label>
-                <input type="date" id="endDate" name="endDate" value="${plan.endTime}"/>
-            </div>
-            
-            <!-- Chỉnh sửa thông tin các chiến dịch -->
-            <c:forEach var="campaign" items="${campaigns}">
-                <div class="form-field">
-                    <label>Chiến Dịch ID: <c:out value="${campaign.id}"/></label>
-                    <input type="hidden" name="campaignId" value="${campaign.id}"/>
-                    <label for="quantity_${campaign.id}">Số Lượng</label>
-                    <input type="number" id="quantity_${campaign.id}" name="quantity_${campaign.id}" value="${campaign.quantity}"/>
-                    <label for="effort_${campaign.id}">Đơn vị Effort</label>
-                    <input type="number" id="effort_${campaign.id}" name="effort_${campaign.id}" step="0.01" value="${campaign.effort}"/>
-                </div>
+            <label for="startTime">Thời gian bắt đầu:</label>
+            <input type="date" id="startTime" name="startTime" value="${plan.startTime}" required/>
+
+            <label for="endTime">Thời gian kết thúc:</label>
+            <input type="date" id="endTime" name="endTime" value="${plan.endTime}" required/>
+
+            <label for="workshopId">Phân xưởng:</label>
+            <input type="text" id="workshopId" name="workshopId" value="${plan.workshop.id}" required/>
+
+            <c:forEach var="campaign" items="${plan.campains}">
+                <fieldset>
+                    <legend>Chi Tiết Chiến Dịch Sản Xuất (ID: <c:out value="${campaign.id}"/>)</legend>
+                    
+                    <label for="product_${campaign.id}">Sản phẩm ID:</label>
+                    <input type="text" id="product_${campaign.id}" name="product_${campaign.id}" value="${campaign.p.id}" required/>
+
+                    <label for="quantity_${campaign.id}">Số lượng sản phẩm:</label>
+                    <input type="number" id="quantity_${campaign.id}" name="quantity_${campaign.id}" value="${campaign.quantity}" required/>
+
+                    <label for="effort_${campaign.id}">Effort:</label>
+                    <input type="number" step="0.1" id="effort_${campaign.id}" name="effort_${campaign.id}" value="${campaign.effort}" required/>
+                </fieldset>
             </c:forEach>
-            
-            <button type="submit" class="submit-button">Lưu Thay Đổi</button>
+
+            <input type="submit" value="Cập Nhật Kế Hoạch"/>
         </form>
     </div>
 </body>
