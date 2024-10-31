@@ -33,6 +33,7 @@ public class PlanCampaignDBContext extends DBContext<PlanCampain> {
     public ArrayList<PlanCampain> list(int planId) {
         ArrayList<PlanCampain> campaigns = new ArrayList<>();
         try {
+            connection.setAutoCommit(false);
             // Truy vấn các chiến dịch sản xuất từ bảng PlanCampaign
             String sql_campaign = "SELECT [camid], [plid], [pid], [quantity], [unitEffort] FROM [PlanCampaign] WHERE [plid] = ?";
             try (PreparedStatement stm_campaign = connection.prepareStatement(sql_campaign)) {
@@ -43,7 +44,7 @@ public class PlanCampaignDBContext extends DBContext<PlanCampain> {
                         campaign.setId(rs_campaign.getInt("camid"));
                         campaign.setQuantity(rs_campaign.getInt("quantity"));
                         campaign.setEffort(rs_campaign.getFloat("unitEffort"));
-                        
+
                         // Lấy thông tin sản phẩm từ bảng Product
                         int productId = rs_campaign.getInt("pid");
                         String sql_product = "SELECT [pid], [pname] FROM [Product] WHERE [pid] = ?";
@@ -54,7 +55,7 @@ public class PlanCampaignDBContext extends DBContext<PlanCampain> {
                                     Product product = new Product();
                                     product.setId(rs_product.getInt("pid"));
                                     product.setName(rs_product.getString("pname"));
-                                    
+
                                     // Set product vào campaign
                                     campaign.setP(product);
                                 }
@@ -68,6 +69,14 @@ public class PlanCampaignDBContext extends DBContext<PlanCampain> {
             }
         } catch (SQLException ex) {
             Logger.getLogger(PlanCampaignDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                connection.close();
+                connection.setAutoCommit(true);
+            } catch (SQLException ex) {
+                Logger.getLogger(PlanCampaignDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
         }
         return campaigns;
     }

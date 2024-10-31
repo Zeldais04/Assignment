@@ -1,5 +1,5 @@
-
 package dal;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,9 +10,10 @@ import model.*;
 
 /**
  * Daitqhe182481
+ *
  * @author Zeldais
  */
-public class PlanDBContext extends DBContext<Plan>{
+public class PlanDBContext extends DBContext<Plan> {
 
     @Override
     public void insert(Plan model) {
@@ -37,17 +38,16 @@ public class PlanDBContext extends DBContext<Plan>{
                     + "           ,?\n"
                     + "           ,?\n"
                     + "           ,?)";
-            
+
             PreparedStatement stm_insert_plan = connection.prepareStatement(sql_insert_plan);
             stm_insert_plan.setDate(1, model.getStartTime());
             stm_insert_plan.setDate(2, model.getEndTime());
             stm_insert_plan.setInt(3, model.getD().getId());
             stm_insert_plan.executeUpdate();
-            
+
             PreparedStatement stm_select_plan = connection.prepareStatement(sql_select_plan);
             ResultSet rs = stm_select_plan.executeQuery();
-            if(rs.next())
-            {
+            if (rs.next()) {
                 model.setId(rs.getInt("plid"));
             }
             for (PlanCampain campain : model.getCampains()) {
@@ -92,32 +92,37 @@ public class PlanDBContext extends DBContext<Plan>{
     }
 
     @Override
-public ArrayList<Plan> list() {
-    ArrayList<Plan> plans = new ArrayList<>();
-    try {
-        String sql = "SELECT [plid], [startTime], [endTime], [did] FROM [Plan]";
-        PreparedStatement stm = connection.prepareStatement(sql);
-        ResultSet rs = stm.executeQuery();
-        while (rs.next()) {
-            Plan plan = new Plan();
-            plan.setId(rs.getInt("plid"));
-            plan.setStartTime(rs.getDate("startTime"));
-            plan.setEndTime(rs.getDate("endTime"));
-            // Set department or other related objects here if needed
-            plans.add(plan);
+    public ArrayList<Plan> list() {
+        ArrayList<Plan> plans = new ArrayList<>();
+        try {
+            String sql = "SELECT [plid], [startTime], [endTime], [did] FROM [Plan]";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Plan plan = new Plan();
+                plan.setId(rs.getInt("plid"));
+                plan.setStartTime(rs.getDate("startTime"));
+                plan.setEndTime(rs.getDate("endTime"));
+                // Set department or other related objects here if needed
+                plans.add(plan);
+            }
+            rs.close();
+            stm.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(PlanDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            try {
+                connection.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(PlanDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
-        rs.close();
-        stm.close();
-    } catch (SQLException ex) {
-        Logger.getLogger(PlanDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        return plans;
     }
-    return plans;
-}
-
 
     @Override
     public Plan get(int id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
- 
+
 }
