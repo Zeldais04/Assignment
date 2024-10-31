@@ -83,7 +83,22 @@ public class PlanDBContext extends DBContext<Plan> {
 
     @Override
     public void update(Plan model) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try {
+            String sql = "UPDATE [Plan] SET [startTime] = ?, [endTime] = ? WHERE [plid] = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setDate(1, model.getStartTime());
+            stm.setDate(2, model.getEndTime());
+            stm.setInt(3, model.getId());
+            stm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(PlanDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            try {
+                connection.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(PlanDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 
     @Override

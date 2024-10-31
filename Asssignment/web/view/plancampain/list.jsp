@@ -85,6 +85,28 @@
                 text-align: center;
                 margin-bottom: 20px;
             }
+            .back-button, .edit-button {
+                display: inline-block;
+                padding: 10px 20px;
+                font-size: 16px;
+                text-align: center;
+                background-color: #4CAF50;
+                color: white;
+                text-decoration: none;
+                border-radius: 5px;
+                margin-bottom: 20px;
+            }
+            .back-button:hover, .edit-button:hover {
+                background-color: #45a049;
+            }
+            .button-container {
+                text-align: right;
+                margin-bottom: 20px;
+            }
+            .details {
+                text-align: center;
+                margin-bottom: 20px;
+            }
         </style>
     </head>
     <body>
@@ -93,12 +115,14 @@
         <!-- Nút trở về trang trước, căn sang bên phải -->
         <div class="button-container">
             <a href="${pageContext.request.contextPath}/productionplan/list" class="back-button">Trở về</a>
+            <a href="${pageContext.request.contextPath}/productionplan/update?planId=${planId}" class="edit-button">Chỉnh sửa</a>
+
         </div>
 
         <!-- Hiển thị thông tin chi tiết về thời gian của kế hoạch sản xuất -->
         <div class="details">
             <p><strong>Thời gian bắt đầu:</strong> <c:out value="${plan.startTime}"/>
-               <strong>Thời gian kết thúc:</strong> <c:out value="${plan.endTime}"/></p>
+                <strong>Thời gian kết thúc:</strong> <c:out value="${plan.endTime}"/></p>
 
         </div>
 

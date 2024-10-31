@@ -22,7 +22,22 @@ public class PlanCampaignDBContext extends DBContext<PlanCampain> {
 
     @Override
     public void update(PlanCampain model) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try {
+            String sql = "UPDATE [PlanCampaign] SET [quantity] = ?, [unitEffort] = ? WHERE [camid] = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, model.getQuantity());
+            stm.setFloat(2, model.getEffort());
+            stm.setInt(3, model.getId());
+            stm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(PlanCampaignDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            try {
+                connection.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(PlanCampaignDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 
     @Override
