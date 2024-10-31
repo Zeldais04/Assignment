@@ -4,78 +4,128 @@
     Author     : Zeldais
 --%>
 
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Chỉnh Sửa Kế Hoạch Sản Xuất</title>
-    <style>
-        /* CSS cơ bản cho form */
-        .form-container {
-            width: 50%;
-            margin: 0 auto;
-            background-color: #f4f6f9;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        input[type="text"], input[type="date"], input[type="number"], select {
-            width: 100%;
-            padding: 10px;
-            margin: 8px 0;
-            display: inline-block;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-        input[type="submit"] {
-            width: 100%;
-            background-color: #4CAF50;
-            color: white;
-            padding: 14px 20px;
-            margin: 8px 0;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        input[type="submit"]:hover {
-            background-color: #45a049;
-        }
-    </style>
-</head>
-<body>
-    <h2>Chỉnh Sửa Kế Hoạch Sản Xuất</h2>
-    <div class="form-container">
-        <form action="${pageContext.request.contextPath}/productionplan/update" method="post">
-            <input type="hidden" name="planId" value="${plan.id}"/>
-            
-            <label for="startTime">Thời gian bắt đầu:</label>
-            <input type="date" id="startTime" name="startTime" value="${plan.startTime}" required/>
-
-            <label for="endTime">Thời gian kết thúc:</label>
-            <input type="date" id="endTime" name="endTime" value="${plan.endTime}" required/>
-
-            <label for="workshopId">Phân xưởng:</label>
-            <input type="text" id="workshopId" name="workshopId" value="${plan.workshop.id}" required/>
-
-            <c:forEach var="campaign" items="${plan.campains}">
-                <fieldset>
-                    <legend>Chi Tiết Chiến Dịch Sản Xuất (ID: <c:out value="${campaign.id}"/>)</legend>
-                    
-                    <label for="product_${campaign.id}">Sản phẩm ID:</label>
-                    <input type="text" id="product_${campaign.id}" name="product_${campaign.id}" value="${campaign.p.id}" required/>
-
-                    <label for="quantity_${campaign.id}">Số lượng sản phẩm:</label>
-                    <input type="number" id="quantity_${campaign.id}" name="quantity_${campaign.id}" value="${campaign.quantity}" required/>
-
-                    <label for="effort_${campaign.id}">Effort:</label>
-                    <input type="number" step="0.1" id="effort_${campaign.id}" name="effort_${campaign.id}" value="${campaign.effort}" required/>
-                </fieldset>
-            </c:forEach>
-
-            <input type="submit" value="Cập Nhật Kế Hoạch"/>
-        </form>
-    </div>
-</body>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Chỉnh Sửa Kế Hoạch Sản Xuất</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #f5f5f5;
+                margin: 0;
+                padding: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                min-height: 100vh;
+            }
+            .form-container {
+                background: #ffffff;
+                padding: 20px;
+                border-radius: 8px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                width: 600px;
+            }
+            h1 {
+                font-size: 1.5em;
+                text-align: center;
+                color: #333;
+            }
+            form {
+                display: flex;
+                flex-direction: column;
+            }
+            label {
+                font-weight: bold;
+                margin-top: 10px;
+            }
+            input[type="date"], select, input[type="text"] {
+                padding: 10px;
+                margin-top: 5px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                font-size: 1em;
+            }
+            table {
+                width: 100%;
+                margin-top: 15px;
+                border-collapse: collapse;
+            }
+            table, th, td {
+                border: 1px solid #ddd;
+            }
+            th, td {
+                padding: 10px;
+                text-align: center;
+            }
+            th {
+                background-color: #f0f0f0;
+            }
+            .button-container {
+                margin-top: 20px;
+                display: flex;
+                justify-content: center;
+            }
+            input[type="submit"] {
+                background-color: #28a745;
+                color: #fff;
+                padding: 10px 20px;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+            }
+            input[type="submit"]:hover {
+                background-color: #218838;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="form-container">
+            <h1>Chỉnh Sửa Kế Hoạch Sản Xuất</h1>
+            <form action="update" method="POST"> 
+                <input type="hidden" name="planId" value="${plan.id}"/>
+                
+                <label for="from">Thời gian bắt đầu:</label>
+                <input type="date" name="from" id="from" value="${plan.startTime}" required/> 
+                
+                <label for="to">Thời gian kết thúc:</label>
+                <input type="date" name="to" id="to" value="${plan.endTime}" required/>
+                
+                <label for="workshop">Phân xưởng:</label>
+                <select name="did" id="workshop">
+                    <c:forEach items="${requestScope.depts}" var="d">
+                        <option value="${d.id}" ${d.id == plan.d.id ? 'selected' : ''}>${d.name}</option>
+                    </c:forEach>
+                </select>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Sản Phẩm</th>
+                            <th>Số Lượng</th>
+                            <th>Effort Dự Kiến</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <c:forEach items="${campaigns}" var="campaign">
+                        <tr>
+                            <td>${campaign.p.name}<input type="hidden" name="pid" value="${campaign.p.id}"/></td>
+                            <td><input type="text" name="quantity${campaign.p.id}" value="${campaign.quantity}" required/></td>
+                            <td><input type="text" name="effort${campaign.p.id}" value="${campaign.effort}" required/></td>
+                        </tr>   
+                        </c:forEach>
+                    </tbody>
+                </table>
+                
+                <div class="button-container">
+                    <input type="submit" name="Save" value="Cập Nhật" />
+                </div>
+            </form>
+        </div>
+    </body>
 </html>
