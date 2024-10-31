@@ -92,9 +92,28 @@ public class PlanDBContext extends DBContext<Plan>{
     }
 
     @Override
-    public ArrayList<Plan> list() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+public ArrayList<Plan> list() {
+    ArrayList<Plan> plans = new ArrayList<>();
+    try {
+        String sql = "SELECT [plid], [startTime], [endTime], [did] FROM [Plan]";
+        PreparedStatement stm = connection.prepareStatement(sql);
+        ResultSet rs = stm.executeQuery();
+        while (rs.next()) {
+            Plan plan = new Plan();
+            plan.setId(rs.getInt("plid"));
+            plan.setStartTime(rs.getDate("startTime"));
+            plan.setEndTime(rs.getDate("endTime"));
+            // Set department or other related objects here if needed
+            plans.add(plan);
+        }
+        rs.close();
+        stm.close();
+    } catch (SQLException ex) {
+        Logger.getLogger(PlanDBContext.class.getName()).log(Level.SEVERE, null, ex);
     }
+    return plans;
+}
+
 
     @Override
     public Plan get(int id) {
