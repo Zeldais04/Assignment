@@ -127,19 +127,5 @@
             </form>
         </div>
     </body>
-    <script>
-            function validateForm() {
-                const products = document.querySelectorAll('[name^="quantity"][type="text"]');
-                for (const product of products) {
-                    const id = product.name.replace('quantity', '');
-                    const quantity = parseFloat(document.querySelector(`[name="quantity${id}"]`).value);
-                    const effort = parseFloat(document.querySelector(`[name="effort${id}"]`).value);
-                    if (isNaN(quantity) || isNaN(effort) || effort > quantity) {
-                        alert('Effort must be less than or equal to Quantity for product ID: ' + id);
-                        return false;
-                    }
-                }
-                return true;
-            }
-        </script>
+    
 </html>
