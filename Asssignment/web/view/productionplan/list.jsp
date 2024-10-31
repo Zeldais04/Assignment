@@ -67,7 +67,7 @@
                     <th>ID Kế hoạch</th>
                     <th>Ngày Bắt Đầu</th>
                     <th>Ngày Kết Thúc</th>
-                    <th>Thông Tin Thống Kê</th> <!-- Sẽ bổ sung sau -->
+                    <th>Chi Tiết</th>
                 </tr>
             </thead>
             <tbody>
@@ -76,7 +76,7 @@
                         <td><c:out value="${plan.id}"/></td>
                         <td><c:out value="${plan.startTime}"/></td>
                         <td><c:out value="${plan.endTime}"/></td>
-                        <td>Thống kê</td> <!-- Thông tin chi tiết sau -->
+                        <td><a href="${pageContext.request.contextPath}/plancampain/list?planId=${plan.id}">Xem Chi Tiết</a></td>
                     </tr>
                 </c:forEach>
             </tbody>
