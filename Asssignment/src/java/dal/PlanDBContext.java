@@ -82,17 +82,50 @@ public class PlanDBContext extends DBContext<Plan> {
     }
 
     @Override
-    public void update(Plan model) {
+    public void update(Plan plan) {
         try {
-            String sql = "UPDATE [Plan] SET [startTime] = ?, [endTime] = ? WHERE [plid] = ?";
-            PreparedStatement stm = connection.prepareStatement(sql);
-            stm.setDate(1, model.getStartTime());
-            stm.setDate(2, model.getEndTime());
-            stm.setInt(3, model.getId());
-            stm.executeUpdate();
+            connection.setAutoCommit(false);
+
+            // Cập nhật kế hoạch sản xuất
+            String sql_update_plan = "UPDATE [Plan] SET [startTime] = ?, [endTime] = ?, [did] = ? WHERE [plid] = ?";
+            PreparedStatement stm_update_plan = connection.prepareStatement(sql_update_plan);
+            stm_update_plan.setDate(1, plan.getStartTime());
+            stm_update_plan.setDate(2, plan.getEndTime());
+            stm_update_plan.setInt(3, plan.getD().getId());
+            stm_update_plan.setInt(4, plan.getId());
+            stm_update_plan.executeUpdate();
+
+            // Xóa tất cả các chiến dịch cũ liên quan đến kế hoạch này
+            String sql_delete_campaigns = "DELETE FROM [PlanCampaign] WHERE [plid] = ?";
+            PreparedStatement stm_delete_campaigns = connection.prepareStatement(sql_delete_campaigns);
+            stm_delete_campaigns.setInt(1, plan.getId());
+            stm_delete_campaigns.executeUpdate();
+
+            // Thêm lại các chiến dịch mới
+            String sql_insert_campaign = "INSERT INTO [PlanCampaign] ([plid], [pid], [quantity], [unitEffort]) VALUES (?, ?, ?, ?)";
+            for (PlanCampain campaign : plan.getCampains()) {
+                PreparedStatement stm_insert_campaign = connection.prepareStatement(sql_insert_campaign);
+                stm_insert_campaign.setInt(1, plan.getId());
+                stm_insert_campaign.setInt(2, campaign.getP().getId());
+                stm_insert_campaign.setInt(3, campaign.getQuantity());
+                stm_insert_campaign.setFloat(4, campaign.getEffort());
+                stm_insert_campaign.executeUpdate();
+            }
+
+            connection.commit();
         } catch (SQLException ex) {
             Logger.getLogger(PlanDBContext.class.getName()).log(Level.SEVERE, null, ex);
-        }finally{
+            try {
+                connection.rollback();
+            } catch (SQLException rollbackEx) {
+                Logger.getLogger(PlanDBContext.class.getName()).log(Level.SEVERE, null, rollbackEx);
+            }
+        } finally {
+            try {
+                connection.setAutoCommit(true);
+            } catch (SQLException ex) {
+                Logger.getLogger(PlanDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            }
             try {
                 connection.close();
             } catch (SQLException ex) {
