@@ -14,7 +14,7 @@
     </servlet>
     <servlet>
         <servlet-name>ProductionplanUpdate</servlet-name>
-        <servlet-class>controller.productionplan.ProductionplanUpdate</servlet-class>
+        <servlet-class>controller.productionplan.ProductionplanUpdateController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ProductionPlanList</servlet-name>
