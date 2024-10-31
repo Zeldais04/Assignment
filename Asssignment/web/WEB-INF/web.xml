@@ -4,8 +4,16 @@
         <servlet-name>ProductionPlanCreateController</servlet-name>
         <servlet-class>controller.productionplan.ProductionPlanCreateController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LoginController</servlet-name>
+        <servlet-class>controller.accesscontrol.LoginController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ProductionPlanCreateController</servlet-name>
         <url-pattern>/productionplan/create</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoginController</servlet-name>
+        <url-pattern>/login</url-pattern>
     </servlet-mapping>
 </web-app>
