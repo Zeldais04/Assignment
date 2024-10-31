@@ -1,5 +1,5 @@
 
-package controller;
+package controller.productionplan;
 
 import dal.*;
 import java.io.IOException;
