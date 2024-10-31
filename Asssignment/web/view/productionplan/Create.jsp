@@ -1,111 +1,106 @@
+<%-- 
+    Document   : Create
+    Created on : Oct 30, 2024, 8:55:56 AM
+    Author     : Zeldais
+--%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
     <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Create Workshop Entry</title>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-k6RqeWeci5ZR/Lv4MR0z4MjrFdqY6KZBbNvZ92mJ8D0DjLg5YJ5uCvf0Usl5z+e" crossorigin="anonymous">
-        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Styled JSP Page</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
         <style>
             body {
-                font-family: 'Roboto', sans-serif;
-                background-color: #f9f9f9;
-                color: #333;
-                line-height: 1.6;
+                font-family: Arial, sans-serif;
+                background-color: #f5f5f5;
                 margin: 0;
                 padding: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                min-height: 100vh;
             }
-            .container {
-                max-width: 800px;
-                margin: 40px auto;
-                background: #fff;
+            .form-container {
+                background: #ffffff;
                 padding: 20px;
                 border-radius: 8px;
-                box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                width: 600px;
             }
-            h2 {
+            h1 {
+                font-size: 1.5em;
                 text-align: center;
                 color: #333;
-                margin-bottom: 20px;
             }
             form {
                 display: flex;
                 flex-direction: column;
-                gap: 15px;
             }
             label {
-                font-weight: 500;
+                font-weight: bold;
+                margin-top: 10px;
             }
-            input, select {
+            input[type="date"], select, input[type="text"] {
                 padding: 10px;
-                margin: 5px 0;
-                width: 100%;
-                box-sizing: border-box;
-                border-radius: 4px;
+                margin-top: 5px;
                 border: 1px solid #ccc;
-                transition: border-color 0.3s ease;
-            }
-            input:focus, select:focus {
-                border-color: #007BFF;
-                outline: none;
+                border-radius: 5px;
+                font-size: 1em;
             }
             table {
                 width: 100%;
+                margin-top: 15px;
                 border-collapse: collapse;
-                margin-top: 20px;
             }
             table, th, td {
                 border: 1px solid #ddd;
+            }
+            th, td {
                 padding: 10px;
-                text-align: left;
+                text-align: center;
             }
             th {
-                background-color: #f2f2f2;
-                color: #333;
+                background-color: #f0f0f0;
             }
-            tr:nth-child(even) {
-                background-color: #f9f9f9;
+            .button-container {
+                margin-top: 20px;
+                display: flex;
+                justify-content: center;
             }
             input[type="submit"] {
-                background-color: #007BFF;
-                color: white;
+                background-color: #28a745;
+                color: #fff;
+                padding: 10px 20px;
                 border: none;
+                border-radius: 5px;
                 cursor: pointer;
-                padding: 12px;
-                font-size: 16px;
-                border-radius: 4px;
                 transition: background-color 0.3s ease;
             }
             input[type="submit"]:hover {
-                background-color: #0056b3;
-            }
-            .fa-info-circle {
-                color: #007BFF;
-                margin-left: 5px;
-                cursor: pointer;
+                background-color: #218838;
             }
         </style>
     </head>
     <body>
-        <div class="container">
-            <h2>Create Workshop Entry</h2>
-            <form action="create" method="POST">
+        <div class="form-container">
+            <h1>Workshop Schedule Form</h1>
+            <form action="create" method="POST"> 
                 <label for="from">From:</label>
-                <input type="date" id="from" name="from" required/>
-
+                <input type="date" name="from" id="from" /> 
+                
                 <label for="to">To:</label>
-                <input type="date" id="to" name="to" required/>
-
+                <input type="date" name="to" id="to" />
+                
                 <label for="workshop">Workshop:</label>
-                <select id="workshop" name="did" required>
+                <select name="did" id="workshop">
                     <c:forEach items="${requestScope.depts}" var="d">
                         <option value="${d.id}">${d.name}</option>
                     </c:forEach>
                 </select>
-
+                
                 <table>
                     <thead>
                         <tr>
@@ -116,19 +111,18 @@
                     </thead>
                     <tbody>
                         <c:forEach items="${requestScope.products}" var="p">
-                            <tr>
-                                <td>
-                                    ${p.name}
-                                    <input type="hidden" name="pid" value="${p.id}"/>
-                                </td>
-                                <td><input type="number" name="quantity${p.id}" min="0" required/></td>
-                                <td><input type="number" name="effort${p.id}" min="0" required/></td>
-                            </tr>
+                        <tr>
+                            <td>${p.name}<input type="hidden" name="pid" value="${p.id}"/></td>
+                            <td><input type="text" name="quantity${p.id}"/></td>
+                            <td><input type="text" name="effort${p.id}"/></td>
+                        </tr>   
                         </c:forEach>
                     </tbody>
                 </table>
-
-                <input type="submit" value="Save"/>
+                
+                <div class="button-container">
+                    <input type="submit" name="Save" value="Save" />
+                </div>
             </form>
         </div>
     </body>
