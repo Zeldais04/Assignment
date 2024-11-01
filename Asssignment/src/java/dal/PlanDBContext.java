@@ -195,4 +195,43 @@ public class PlanDBContext extends DBContext<Plan> {
         return plan;
 
     }
+
+    public void delete(int planId) {
+        try {
+            connection.setAutoCommit(false);
+
+            // Xóa tất cả các chiến dịch liên quan đến kế hoạch sản xuất này
+            String sql_delete_campaigns = "DELETE FROM [PlanCampaign] WHERE [plid] = ?";
+            PreparedStatement stm_delete_campaigns = connection.prepareStatement(sql_delete_campaigns);
+            stm_delete_campaigns.setInt(1, planId);
+            stm_delete_campaigns.executeUpdate();
+
+            // Xóa kế hoạch sản xuất
+            String sql_delete_plan = "DELETE FROM [Plan] WHERE [plid] = ?";
+            PreparedStatement stm_delete_plan = connection.prepareStatement(sql_delete_plan);
+            stm_delete_plan.setInt(1, planId);
+            stm_delete_plan.executeUpdate();
+
+            connection.commit();
+        } catch (SQLException ex) {
+            Logger.getLogger(PlanDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            try {
+                connection.rollback();
+            } catch (SQLException rollbackEx) {
+                Logger.getLogger(PlanDBContext.class.getName()).log(Level.SEVERE, null, rollbackEx);
+            }
+        } finally {
+            try {
+                connection.setAutoCommit(true);
+            } catch (SQLException ex) {
+                Logger.getLogger(PlanDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            try {
+                connection.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(PlanDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
 }
