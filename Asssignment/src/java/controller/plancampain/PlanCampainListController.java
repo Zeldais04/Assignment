@@ -1,24 +1,27 @@
 package controller.plancampain;
 
+import controller.accesscontrol.BaseRBACController;
 import dal.PlanCampaignDBContext;
 import dal.PlanDBContext;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import model.Plan;
 import model.PlanCampain;
+import model.accesscontrol.User;
 
 /**
  *
  * @author Zeldais
  */
-public class PlanCampainListController extends HttpServlet {
+public class PlanCampainListController extends BaseRBACController {
+
+    
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doAuthorizedGet(HttpServletRequest request, HttpServletResponse response, User loggeduser) throws ServletException, IOException {
         String planIdParam = request.getParameter("planId");
         if (planIdParam == null || planIdParam.isEmpty()) {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Plan ID is missing");
@@ -41,5 +44,10 @@ public class PlanCampainListController extends HttpServlet {
         } catch (NumberFormatException e) {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid Plan ID format");
         }
+    }
+
+    @Override
+    protected void doAuthorizedPost(HttpServletRequest request, HttpServletResponse response, User loggeduser) throws ServletException, IOException {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

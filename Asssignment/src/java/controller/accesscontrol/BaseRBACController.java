@@ -15,12 +15,12 @@ import model.accesscontrol.*;
  */
 public abstract class BaseRBACController extends BaseRequiredAuthenticationController {
 
-    private boolean isAuthorized(HttpServletRequest req, User loggeduser)
+    private boolean isAuthorized(HttpServletRequest request, User loggeduser)
     {
         UserDBContext db = new UserDBContext();
         ArrayList<Role> roles = db.getRoles(loggeduser.getName());
         loggeduser.setRoles(roles);
-        String c_url = req.getServletPath();
+        String c_url = request.getServletPath();
         for (Role role : roles) {
             for (Feature feature : role.getFeatures()) {
                 if(feature.getUrl().equals(c_url))
@@ -31,26 +31,26 @@ public abstract class BaseRBACController extends BaseRequiredAuthenticationContr
         return false;
     }
 
-    protected abstract void doAuthorizedGet(HttpServletRequest req, HttpServletResponse resp, User loggeduser) throws ServletException, IOException;
+    protected abstract void doAuthorizedGet(HttpServletRequest request, HttpServletResponse response, User loggeduser) throws ServletException, IOException;
 
-    protected abstract void doAuthorizedPost(HttpServletRequest req, HttpServletResponse resp, User loggeduser) throws ServletException, IOException;
+    protected abstract void doAuthorizedPost(HttpServletRequest request, HttpServletResponse response, User loggeduser) throws ServletException, IOException;
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp, User loggeduser) throws ServletException, IOException {
-        if (isAuthorized(req, loggeduser)) {
-            doAuthorizedGet(req, resp, loggeduser);
+    protected void doGet(HttpServletRequest request, HttpServletResponse response, User loggeduser) throws ServletException, IOException {
+        if (isAuthorized(request, loggeduser)) {
+            doAuthorizedGet(request, response, loggeduser);
         } else {
-            resp.sendError(403, "you do not have right to access this feature!");
+            response.sendError(403, "you do not have right to access this feature!");
         }
 
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp, User loggeduser) throws ServletException, IOException {
-        if (isAuthorized(req, loggeduser)) {
-            doAuthorizedPost(req, resp, loggeduser);
+    protected void doPost(HttpServletRequest request, HttpServletResponse response, User loggeduser) throws ServletException, IOException {
+        if (isAuthorized(request, loggeduser)) {
+            doAuthorizedPost(request, response, loggeduser);
         } else {
-            resp.sendError(403, "you do not have right to access this feature!");
+            response.sendError(403, "you do not have right to access this feature!");
         }
     }
 

@@ -23,7 +23,7 @@ public class UserDBContext extends DBContext<User> {
                      \tINNER JOIN [Role] r ON r.rid = ur.rid
                      \tINNER JOIN RoleFeature rf ON rf.rid = r.rid
                      \tINNER JOIN Feature f ON f.fid = rf.fid
-                     WHERE u.username = ?
+                     WHERE u.uname = ?
                      ORDER BY r.rid ASC, f.fid ASC""";
 
         PreparedStatement stm = null;

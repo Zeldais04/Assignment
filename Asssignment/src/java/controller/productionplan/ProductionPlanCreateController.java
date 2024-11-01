@@ -1,5 +1,6 @@
 package controller.productionplan;
 
+import controller.accesscontrol.BaseRBACController;
 import dal.*;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -9,25 +10,17 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.sql.Date;
 import java.util.ArrayList;
 import model.*;
+import model.accesscontrol.User;
 
 /**
  *
  * @author Zeldais
  */
-public class ProductionPlanCreateController extends HttpServlet {
+public class ProductionPlanCreateController extends BaseRBACController {
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void doAuthorizedGet(HttpServletRequest request, HttpServletResponse response, User loggeduser) throws ServletException, IOException {
         ProductDBContext dbProduct = new ProductDBContext();
         DepartmentDBContext dbDept = new DepartmentDBContext();
         request.setAttribute("products", dbProduct.list());
@@ -35,17 +28,8 @@ public class ProductionPlanCreateController extends HttpServlet {
         request.getRequestDispatcher("/view/productionplan/create.jsp").forward(request, response);
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void doAuthorizedPost(HttpServletRequest request, HttpServletResponse response, User loggeduser) throws ServletException, IOException {
         String[] pids = request.getParameterValues("pid");
 
         Plan plan = new Plan();
@@ -141,7 +125,6 @@ public class ProductionPlanCreateController extends HttpServlet {
             request.getRequestDispatcher("/view/productionplan/create.jsp").forward(request, response);
 
         }
-
     }
 
 }
