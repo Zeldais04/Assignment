@@ -35,6 +35,10 @@
                 text-align: center;
                 color: #333;
             }
+            h5 {
+                text-align: center;
+                color: red;
+            }
             form {
                 display: flex;
                 flex-direction: column;
@@ -88,6 +92,11 @@
     <body>
         <div class="form-container">
             <h1>Workshop Schedule Form</h1>
+            <h5>
+                <c:if test="${not empty errorMessage}">
+                    <div class="error-message">${errorMessage}</div>
+                </c:if>
+            </h5>
             <form action="create" method="POST" onsubmit="return validateForm()"> 
                 <label for="from">From:</label>
                 <input type="date" name="from" id="from" /> 
@@ -126,7 +135,8 @@
                 </div>
             </form>
         </div>
-        
+
+
 
     </body>
 

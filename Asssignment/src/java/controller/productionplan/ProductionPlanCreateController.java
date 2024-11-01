@@ -2,7 +2,6 @@ package controller.productionplan;
 
 import dal.*;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -50,7 +49,6 @@ public class ProductionPlanCreateController extends HttpServlet {
         String[] pids = request.getParameterValues("pid");
 
         Plan plan = new Plan();
-
         plan.setStartTime(Date.valueOf(request.getParameter("from")));
 
         // Kiểm tra giá trị endTime phải lớn hơn startTime
@@ -60,14 +58,29 @@ public class ProductionPlanCreateController extends HttpServlet {
         if (endTime.after(startTime)) {
             plan.setEndTime(endTime);
         } else {
-            // Gửi thông báo lỗi tới console log
+            // Gửi thông báo lỗi tới console log và giữ nguyên dữ liệu đã nhập
+            System.out.println("Thời gian bắt đầu phải trước thời gian kết thúc");
             request.setAttribute("errorMessage", "Thời gian bắt đầu phải trước thời gian kết thúc");
+            request.setAttribute("from", request.getParameter("from"));
+            request.setAttribute("to", request.getParameter("to"));
+            request.setAttribute("did", request.getParameter("did"));
+            request.setAttribute("pids", pids);
+
+            // Truyền lại các thông tin cần thiết như danh sách phòng ban, sản phẩm
+            DepartmentDBContext departmentDb = new DepartmentDBContext();
+            ArrayList<Department> departments = departmentDb.list();
+            request.setAttribute("depts", departments);
+
+            ProductDBContext productDb = new ProductDBContext();
+            ArrayList<Product> products = productDb.list();
+            request.setAttribute("products", products);
+
             request.getRequestDispatcher("/view/productionplan/create.jsp").forward(request, response);
+            return;
         }
 
         Department d = new Department();
         d.setId(Integer.parseInt(request.getParameter("did")));
-
         plan.setD(d);
         plan.setCampains(new ArrayList<>());
 
@@ -77,10 +90,33 @@ public class ProductionPlanCreateController extends HttpServlet {
 
             PlanCampain c = new PlanCampain();
             c.setP(p);
-            String raw_quantity = request.getParameter("quantity" + pid);
-            String raw_effort = request.getParameter("effort" + pid);
-            c.setQuantity(raw_quantity != null && raw_quantity.length() > 0 ? Integer.parseInt(raw_quantity) : 0);
-            c.setEffort(raw_effort != null && raw_effort.length() > 0 ? Float.parseFloat(raw_effort) : 0);
+            try {
+                String raw_quantity = request.getParameter("quantity" + pid);
+                String raw_effort = request.getParameter("effort" + pid);
+                c.setQuantity(raw_quantity != null && raw_quantity.length() > 0 ? Integer.parseInt(raw_quantity) : 0);
+                c.setEffort(raw_effort != null && raw_effort.length() > 0 ? Float.parseFloat(raw_effort) : 0);
+            } catch (NumberFormatException e) {
+                // Gửi thông báo lỗi tới console log và giữ nguyên dữ liệu đã nhập
+                System.out.println("Số lượng phải là số nguyên và effort phải là số thực");
+                request.setAttribute("errorMessage", "Số lượng phải là số nguyên và effort phải là số thực");
+                request.setAttribute("from", request.getParameter("from"));
+                request.setAttribute("to", request.getParameter("to"));
+                request.setAttribute("did", request.getParameter("did"));
+                request.setAttribute("pids", pids);
+
+                // Truyền lại các thông tin cần thiết như danh sách phòng ban, sản phẩm
+                DepartmentDBContext departmentDb = new DepartmentDBContext();
+                ArrayList<Department> departments = departmentDb.list();
+                request.setAttribute("depts", departments);
+
+                ProductDBContext productDb = new ProductDBContext();
+                ArrayList<Product> products = productDb.list();
+                request.setAttribute("products", products);
+
+                request.getRequestDispatcher("/view/productionplan/create.jsp").forward(request, response);
+                return;
+            }
+
             c.setPl(plan);
             if (c.getQuantity() != 0 && c.getEffort() != 0) {
                 plan.getCampains().add(c);
