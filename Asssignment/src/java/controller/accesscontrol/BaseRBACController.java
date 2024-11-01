@@ -1,9 +1,11 @@
 package controller.accesscontrol;
 
+import dal.UserDBContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 import model.accesscontrol.*;
 
 /**
@@ -13,8 +15,20 @@ import model.accesscontrol.*;
  */
 public abstract class BaseRBACController extends BaseRequiredAuthenticationController {
 
-    private boolean isAuthorized(HttpServletRequest req, User loggeduser) {
-        return true;
+    private boolean isAuthorized(HttpServletRequest req, User loggeduser)
+    {
+        UserDBContext db = new UserDBContext();
+        ArrayList<Role> roles = db.getRoles(loggeduser.getName());
+        loggeduser.setRoles(roles);
+        String c_url = req.getServletPath();
+        for (Role role : roles) {
+            for (Feature feature : role.getFeatures()) {
+                if(feature.getUrl().equals(c_url))
+                    return true;
+            }
+        }
+        
+        return false;
     }
 
     protected abstract void doAuthorizedGet(HttpServletRequest req, HttpServletResponse resp, User loggeduser) throws ServletException, IOException;
