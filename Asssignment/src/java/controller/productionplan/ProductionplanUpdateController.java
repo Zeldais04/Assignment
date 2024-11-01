@@ -41,7 +41,7 @@ public class ProductionplanUpdateController extends HttpServlet {
 
             // Truy vấn danh sách phòng ban (Departments)
             DepartmentDBContext departmentDb = new DepartmentDBContext();
-            ArrayList<Department> departments = departmentDb.list();
+            ArrayList<Department> departments = departmentDb.get("workshop");
 
             // Truy vấn danh sách sản phẩm (Products)
             ProductDBContext productDb = new ProductDBContext();
@@ -98,15 +98,12 @@ public class ProductionplanUpdateController extends HttpServlet {
                 }
             }
 
-            if (!plan.getCampains().isEmpty()) {
-                PlanDBContext db = new PlanDBContext();
-                db.update(plan); // Thực hiện cập nhật kế hoạch
-                response.getWriter().println("Updated the plan!");
-            } else {
-                response.getWriter().println("Your plan did not have any campains");
-            }
+            PlanDBContext db = new PlanDBContext();
+                db.update(plan);
+            
         } catch (NumberFormatException e) {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid input format");
         }
+        response.sendRedirect("list");
     }
 }
