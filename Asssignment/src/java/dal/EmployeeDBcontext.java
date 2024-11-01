@@ -31,9 +31,10 @@ public class EmployeeDBcontext extends DBContext<Employee> {
     @Override
     public ArrayList<Employee> list() {
         ArrayList<Employee> employees = new ArrayList<>();
+        PreparedStatement stm = null;
         try {
             String sql = "SELECT e.eid, e.ename, e.salarylevel, e.did, d.dname FROM Employee e JOIN Dept d ON e.did = d.did";
-            PreparedStatement stm = connection.prepareStatement(sql);
+            stm = connection.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 Employee e = new Employee();
@@ -51,6 +52,7 @@ public class EmployeeDBcontext extends DBContext<Employee> {
         } catch (SQLException ex) {
         }finally{
             try {
+                stm.close();
                 connection.close();
             } catch (SQLException ex) {
                 Logger.getLogger(EmployeeDBcontext.class.getName()).log(Level.SEVERE, null, ex);

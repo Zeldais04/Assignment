@@ -22,9 +22,10 @@ public class PlanCampaignDBContext extends DBContext<PlanCampain> {
 
     @Override
     public void update(PlanCampain model) {
+        PreparedStatement stm =null;
         try {
             String sql = "UPDATE [PlanCampaign] SET [quantity] = ?, [unitEffort] = ? WHERE [camid] = ?";
-            PreparedStatement stm = connection.prepareStatement(sql);
+            stm = connection.prepareStatement(sql);
             stm.setInt(1, model.getQuantity());
             stm.setFloat(2, model.getEffort());
             stm.setInt(3, model.getId());
@@ -33,6 +34,7 @@ public class PlanCampaignDBContext extends DBContext<PlanCampain> {
             Logger.getLogger(PlanCampaignDBContext.class.getName()).log(Level.SEVERE, null, ex);
         }finally{
             try {
+                stm.close();
                 connection.close();
             } catch (SQLException ex) {
                 Logger.getLogger(PlanCampaignDBContext.class.getName()).log(Level.SEVERE, null, ex);
