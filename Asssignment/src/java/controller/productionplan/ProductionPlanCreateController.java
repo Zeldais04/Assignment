@@ -53,16 +53,16 @@ public class ProductionPlanCreateController extends HttpServlet {
 
         plan.setStartTime(Date.valueOf(request.getParameter("from")));
 
-// Kiểm tra giá trị endTime phải lớn hơn startTime
+        // Kiểm tra giá trị endTime phải lớn hơn startTime
         Date startTime = plan.getStartTime();
         Date endTime = Date.valueOf(request.getParameter("to"));
 
         if (endTime.after(startTime)) {
             plan.setEndTime(endTime);
         } else {
-            request.setAttribute("error", "Thời gian bắt đầu phải trước thời gian kết thúc");
+            // Gửi thông báo lỗi tới console log
+            request.setAttribute("errorMessage", "Thời gian bắt đầu phải trước thời gian kết thúc");
             request.getRequestDispatcher("/view/productionplan/create.jsp").forward(request, response);
-            return;
         }
 
         Department d = new Department();
