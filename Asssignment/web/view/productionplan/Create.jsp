@@ -83,7 +83,7 @@
                 background-color: #218838;
             }
         </style>
-        
+
     </head>
     <body>
         <div class="form-container">
@@ -91,17 +91,17 @@
             <form action="create" method="POST" onsubmit="return validateForm()"> 
                 <label for="from">From:</label>
                 <input type="date" name="from" id="from" /> 
-                
+
                 <label for="to">To:</label>
                 <input type="date" name="to" id="to" />
-                
+
                 <label for="workshop">Workshop:</label>
                 <select name="did" id="workshop">
                     <c:forEach items="${requestScope.depts}" var="d">
                         <option value="${d.id}">${d.name}</option>
                     </c:forEach>
                 </select>
-                
+
                 <table>
                     <thead>
                         <tr>
@@ -112,20 +112,24 @@
                     </thead>
                     <tbody>
                         <c:forEach items="${requestScope.products}" var="p">
-                        <tr>
-                            <td>${p.name}<input type="hidden" name="pid" value="${p.id}"/></td>
-                            <td><input type="text" name="quantity${p.id}"/></td>
-                            <td><input type="text" name="effort${p.id}"/></td>
-                        </tr>   
+                            <tr>
+                                <td>${p.name}<input type="hidden" name="pid" value="${p.id}"/></td>
+                                <td><input type="text" name="quantity${p.id}"/></td>
+                                <td><input type="text" name="effort${p.id}"/></td>
+                            </tr>   
                         </c:forEach>
                     </tbody>
                 </table>
-                
+
                 <div class="button-container">
                     <input type="submit" name="Save" value="Save" />
                 </div>
             </form>
         </div>
+        <c:if test="${not empty error}">
+            <div class="error-message">${error}</div>
+        </c:if>
+
     </body>
-    
+
 </html>
