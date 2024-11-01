@@ -2,14 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/Administrator/Documents/GitHub/Assignment/Asssignment/src/java/dal/PlanCampaignDBContext.java</file>
-            <file>file:/C:/Users/Administrator/Documents/GitHub/Assignment/Asssignment/src/java/controller/productionplan/ProductionPlanCreateController.java</file>
-            <file>file:/C:/Users/Administrator/Documents/GitHub/Assignment/Asssignment/src/java/dal/DepartmentDBContext.java</file>
-            <file>file:/C:/Users/Administrator/Documents/GitHub/Assignment/Asssignment/web/view/plancampain/list.jsp</file>
-            <file>file:/C:/Users/Administrator/Documents/GitHub/Assignment/Asssignment/src/java/controller/productionplan/ProductionplanUpdateController.java</file>
-            <file>file:/C:/Users/Administrator/Documents/GitHub/Assignment/Asssignment/web/view/productionplan/update.jsp</file>
-            <file>file:/C:/Users/Administrator/Documents/GitHub/Assignment/Asssignment/src/java/dal/PlanDBContext.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>
