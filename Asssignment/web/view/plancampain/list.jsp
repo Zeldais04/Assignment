@@ -6,6 +6,8 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="ct" uri="http://example.com/customTags" %>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -125,15 +127,13 @@
     <body>
         <h1>Danh sách Chiến Dịch Sản Xuất của Kế Hoạch ${planId}</h1>
 
-
-
         <!-- Hiển thị thông tin chi tiết về thời gian của kế hoạch sản xuất -->
         <div class="details">
             <p><strong>Thời gian bắt đầu:</strong> <c:out value="${plan.startTime}"/>
                 <strong>Thời gian kết thúc:</strong> <c:out value="${plan.endTime}"/></p>
 
         </div>
-
+        <ct:navigationMenu/>
         <div class="table-container">
             <table>
                 <thead>
@@ -158,8 +158,8 @@
                 </tbody>
             </table>
         </div>
-                <br/>
-                
+        <br/>
+
         <!-- Nút trở về trang trước, căn sang bên phải -->
         <div class="button-container">
             <a href="${pageContext.request.contextPath}/productionplan/list" class="back-button">Trở về</a>

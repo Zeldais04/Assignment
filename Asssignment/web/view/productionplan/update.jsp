@@ -6,6 +6,8 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="ct" uri="http://example.com/customTags" %>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -90,6 +92,7 @@
     </head>
     <body>
         <div class="form-container">
+            <ct:navigationMenu/>
             <h1>Chỉnh Sửa Kế Hoạch Sản Xuất</h1>
             <h5>
                 <c:if test="${not empty errorMessage}">
@@ -98,20 +101,20 @@
             </h5>
             <form action="update" method="POST"> 
                 <input type="hidden" name="planId" value="${plan.id}"/>
-                
+
                 <label for="from">Thời gian bắt đầu:</label>
                 <input type="date" name="from" id="from" value="${plan.startTime}" required/> 
-                
+
                 <label for="to">Thời gian kết thúc:</label>
                 <input type="date" name="to" id="to" value="${plan.endTime}" required/>
-                
+
                 <label for="workshop">Phân xưởng:</label>
                 <select name="did" id="workshop">
                     <c:forEach items="${requestScope.depts}" var="d">
                         <option value="${d.id}" ${d.id == plan.d.id ? 'selected' : ''}>${d.name}</option>
                     </c:forEach>
                 </select>
-                
+
                 <table>
                     <thead>
                         <tr>
@@ -122,15 +125,15 @@
                     </thead>
                     <tbody>
                         <c:forEach items="${campaigns}" var="campaign">
-                        <tr>
-                            <td>${campaign.p.name}<input type="hidden" name="pid" value="${campaign.p.id}"/></td>
-                            <td><input type="text" name="quantity${campaign.p.id}" value="${campaign.quantity}" required/></td>
-                            <td><input type="text" name="effort${campaign.p.id}" value="${campaign.effort}" required/></td>
-                        </tr>   
+                            <tr>
+                                <td>${campaign.p.name}<input type="hidden" name="pid" value="${campaign.p.id}"/></td>
+                                <td><input type="text" name="quantity${campaign.p.id}" value="${campaign.quantity}" required/></td>
+                                <td><input type="text" name="effort${campaign.p.id}" value="${campaign.effort}" required/></td>
+                            </tr>   
                         </c:forEach>
                     </tbody>
                 </table>
-                
+
                 <div class="button-container">
                     <input type="submit" name="Save" value="Cập Nhật" />
                 </div>
