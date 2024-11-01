@@ -68,7 +68,7 @@ public class ProductionPlanCreateController extends HttpServlet {
 
             // Truyền lại các thông tin cần thiết như danh sách phòng ban, sản phẩm
             DepartmentDBContext departmentDb = new DepartmentDBContext();
-            ArrayList<Department> departments = departmentDb.list();
+            ArrayList<Department> departments = departmentDb.get("workshop");
             request.setAttribute("depts", departments);
 
             ProductDBContext productDb = new ProductDBContext();
@@ -106,7 +106,7 @@ public class ProductionPlanCreateController extends HttpServlet {
 
                 // Truyền lại các thông tin cần thiết như danh sách phòng ban, sản phẩm
                 DepartmentDBContext departmentDb = new DepartmentDBContext();
-                ArrayList<Department> departments = departmentDb.list();
+                ArrayList<Department> departments = departmentDb.get("workshop");
                 request.setAttribute("depts", departments);
 
                 ProductDBContext productDb = new ProductDBContext();
@@ -133,7 +133,7 @@ public class ProductionPlanCreateController extends HttpServlet {
             request.setAttribute("pids", pids);
             request.setAttribute("errorMessage", "Plan đang không có campain nào!");
             DepartmentDBContext departmentDb = new DepartmentDBContext();
-            ArrayList<Department> departments = departmentDb.list();
+            ArrayList<Department> departments = departmentDb.get("workshop");
             request.setAttribute("depts", departments);
 
             ProductDBContext productDb = new ProductDBContext();
