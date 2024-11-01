@@ -112,7 +112,7 @@ public class ProductionPlanCreateController extends HttpServlet {
                 ProductDBContext productDb = new ProductDBContext();
                 ArrayList<Product> products = productDb.list();
                 request.setAttribute("products", products);
-
+                request.getRequestDispatcher("/view/productionplan/create.jsp").forward(request, response);
                 return;
             }
 
@@ -125,10 +125,9 @@ public class ProductionPlanCreateController extends HttpServlet {
         if (!plan.getCampains().isEmpty()) {
             PlanDBContext db = new PlanDBContext();
             db.insert(plan);
-            response.sendRedirect("/view/productionplan/list.jsp");
+            response.sendRedirect("list");
         } else {
-            request.setAttribute("from", request.getParameter("from"));
-            request.setAttribute("to", request.getParameter("to"));
+            
             request.setAttribute("did", request.getParameter("did"));
             request.setAttribute("pids", pids);
             request.setAttribute("errorMessage", "Plan đang không có campain nào!");
@@ -139,9 +138,9 @@ public class ProductionPlanCreateController extends HttpServlet {
             ProductDBContext productDb = new ProductDBContext();
             ArrayList<Product> products = productDb.list();
             request.setAttribute("products", products);
-        }
+            request.getRequestDispatcher("/view/productionplan/create.jsp").forward(request, response);
 
-        request.getRequestDispatcher("/view/productionplan/create.jsp").forward(request, response);
+        }
 
     }
 
