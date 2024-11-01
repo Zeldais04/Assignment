@@ -127,7 +127,7 @@ public class ProductionPlanCreateController extends HttpServlet {
             db.insert(plan);
             response.sendRedirect("list");
         } else {
-            
+
             request.setAttribute("did", request.getParameter("did"));
             request.setAttribute("pids", pids);
             request.setAttribute("errorMessage", "Plan đang không có campain nào!");
