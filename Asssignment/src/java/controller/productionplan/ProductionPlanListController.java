@@ -13,7 +13,7 @@ import model.Plan;
  *
  * @author Zeldais
  */
-public class ProductionPlanList extends HttpServlet {
+public class ProductionPlanListController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

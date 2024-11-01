@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="6.0" xmlns="https://jakarta.ee/xml/ns/jakartaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd">
     <servlet>
-        <servlet-name>ProductionPlanCreateController</servlet-name>
+        <servlet-name>ProductionPlanCreate</servlet-name>
         <servlet-class>controller.productionplan.ProductionPlanCreateController</servlet-class>
     </servlet>
     <servlet>
@@ -18,7 +18,7 @@
     </servlet>
     <servlet>
         <servlet-name>ProductionPlanList</servlet-name>
-        <servlet-class>controller.productionplan.ProductionPlanList</servlet-class>
+        <servlet-class>controller.productionplan.ProductionPlanListController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>PlanCampainListController</servlet-name>
@@ -30,10 +30,10 @@
     </servlet>
     <servlet>
         <servlet-name>EmployeeListController</servlet-name>
-        <servlet-class>EmployeeListController</servlet-class>
+        <servlet-class>controller.employee.EmployeeListController</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>ProductionPlanCreateController</servlet-name>
+        <servlet-name>ProductionPlanCreate</servlet-name>
         <url-pattern>/productionplan/create</url-pattern>
     </servlet-mapping>
     <servlet-mapping>

@@ -6,6 +6,8 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="ct" uri="http://example.com/customTags" %>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -87,10 +89,11 @@
                 background-color: #218838;
             }
         </style>
-
     </head>
     <body>
+
         <div class="form-container">
+            <ct:navigationMenu/>
             <h1>Workshop Schedule Form</h1>
             <h5>
                 <c:if test="${not empty errorMessage}">
