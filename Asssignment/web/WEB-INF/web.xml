@@ -24,6 +24,10 @@
         <servlet-name>PlanCampainListController</servlet-name>
         <servlet-class>controller.plancampain.PlanCampainListController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ProductionPlanDeleteController</servlet-name>
+        <servlet-class>controller.productionplan.ProductionPlanDeleteController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ProductionPlanCreateController</servlet-name>
         <url-pattern>/productionplan/create</url-pattern>
@@ -47,5 +51,9 @@
     <servlet-mapping>
         <servlet-name>PlanCampainListController</servlet-name>
         <url-pattern>/plancampain/list</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProductionPlanDeleteController</servlet-name>
+        <url-pattern>/productionplan/delete</url-pattern>
     </servlet-mapping>
 </web-app>
