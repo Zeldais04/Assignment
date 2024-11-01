@@ -126,9 +126,7 @@
                 </div>
             </form>
         </div>
-        <c:if test="${not empty error}">
-            <div class="error-message">${error}</div>
-        </c:if>
+        
 
     </body>
 
