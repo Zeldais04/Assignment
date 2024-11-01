@@ -126,7 +126,7 @@ public class ProductionPlanCreateController extends HttpServlet {
         if (!plan.getCampains().isEmpty()) {
             PlanDBContext db = new PlanDBContext();
             db.insert(plan);
-            response.getWriter().println("created a new plan!");
+            response.sendRedirect("/view/productionplan/list.jsp");
         } else {
             response.getWriter().println("your plan did not have any campains");
         }
