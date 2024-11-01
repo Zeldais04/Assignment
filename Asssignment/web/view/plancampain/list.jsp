@@ -85,7 +85,7 @@
                 text-align: center;
                 margin-bottom: 20px;
             }
-            .back-button, .edit-button {
+            .back-button, .edit-button, .delete-button {
                 display: inline-block;
                 padding: 10px 20px;
                 font-size: 16px;
@@ -95,8 +95,21 @@
                 text-decoration: none;
                 border-radius: 5px;
                 margin-bottom: 20px;
+                margin-right: 10px;
             }
-            .back-button:hover, .edit-button:hover {
+            .edit-button {
+                background-color: #FFA500; /* Màu cam để phân biệt nút "Chỉnh sửa" */
+            }
+            .edit-button:hover {
+                background-color: #FF8C00;
+            }
+            .delete-button {
+                background-color: #FF0000; /* Màu đỏ để nhấn mạnh nút "Xóa" */
+            }
+            .delete-button:hover {
+                background-color: #C70000;
+            }
+            .back-button:hover {
                 background-color: #45a049;
             }
             .button-container {
@@ -112,14 +125,7 @@
     <body>
         <h1>Danh sách Chiến Dịch Sản Xuất của Kế Hoạch ${planId}</h1>
 
-        <!-- Nút trở về trang trước, căn sang bên phải -->
-        <div class="button-container">
-            <a href="${pageContext.request.contextPath}/productionplan/list" class="back-button">Trở về</a>
-            <a href="${pageContext.request.contextPath}/productionplan/update?planId=${planId}" class="edit-button">Chỉnh sửa</a>
-            <a href="${pageContext.request.contextPath}/productionplan/delete?planId=${planId}" class="delete-button" onclick="return confirm('Bạn có chắc muốn xóa kế hoạch này không?');">Xóa</a>
 
-
-        </div>
 
         <!-- Hiển thị thông tin chi tiết về thời gian của kế hoạch sản xuất -->
         <div class="details">
@@ -151,6 +157,13 @@
                     </c:forEach>
                 </tbody>
             </table>
+        </div>
+                
+        <!-- Nút trở về trang trước, căn sang bên phải -->
+        <div class="button-container">
+            <a href="${pageContext.request.contextPath}/productionplan/list" class="back-button">Trở về</a>
+            <a href="${pageContext.request.contextPath}/productionplan/update?planId=${planId}" class="edit-button">Chỉnh sửa</a>
+            <a href="${pageContext.request.contextPath}/productionplan/delete?planId=${planId}" class="delete-button" onclick="return confirm('Bạn có chắc muốn xóa kế hoạch này không?');">Xóa</a>
         </div>
     </body>
 </html>
