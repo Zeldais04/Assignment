@@ -73,8 +73,45 @@ public class ProductionplanUpdateController extends HttpServlet {
 
             Plan plan = new Plan();
             plan.setId(planId); // Giữ nguyên ID kế hoạch
-            plan.setStartTime(Date.valueOf(request.getParameter("from")));
-            plan.setEndTime(Date.valueOf(request.getParameter("to")));
+
+            try {
+                // Kiểm tra và lấy giá trị startTime và endTime
+                plan.setStartTime(Date.valueOf(request.getParameter("from")));
+                plan.setEndTime(Date.valueOf(request.getParameter("to")));
+
+                // Kiểm tra giá trị endTime phải lớn hơn startTime
+                if (!plan.getEndTime().after(plan.getStartTime())) {
+                    throw new IllegalArgumentException("Thời gian bắt đầu phải trước thời gian kết thúc");
+                }
+            } catch (IllegalArgumentException e) {
+                // Truyền lại các giá trị đã nhập vào request
+                request.setAttribute("errorMessage", "Thời gian bắt đầu phải trước thời gian kết thúc");
+                request.setAttribute("from", request.getParameter("from"));
+                request.setAttribute("to", request.getParameter("to"));
+                request.setAttribute("did", request.getParameter("did"));
+                request.setAttribute("pids", pids);
+
+                // Truy vấn lại dữ liệu từ DBContext
+                PlanDBContext planDb = new PlanDBContext();
+                Plan existingPlan = planDb.get(planId);
+                request.setAttribute("plan", existingPlan);
+
+                PlanCampaignDBContext campaignDb = new PlanCampaignDBContext();
+                ArrayList<PlanCampain> campaigns = campaignDb.list(planId);
+                request.setAttribute("campaigns", campaigns);
+
+                DepartmentDBContext departmentDb = new DepartmentDBContext();
+                ArrayList<Department> departments = departmentDb.get("workshop");
+                request.setAttribute("depts", departments);
+
+                ProductDBContext productDb = new ProductDBContext();
+                ArrayList<Product> products = productDb.list();
+                request.setAttribute("products", products);
+
+                // Forward lại trang update.jsp với dữ liệu đã nhập và thông báo lỗi
+                request.getRequestDispatcher("/view/productionplan/update.jsp").forward(request, response);
+                return;
+            }
 
             Department d = new Department();
             d.setId(Integer.parseInt(request.getParameter("did")));
@@ -88,10 +125,41 @@ public class ProductionplanUpdateController extends HttpServlet {
 
                 PlanCampain c = new PlanCampain();
                 c.setP(p);
-                String raw_quantity = request.getParameter("quantity" + pid);
-                String raw_effort = request.getParameter("effort" + pid);
-                c.setQuantity(raw_quantity != null && raw_quantity.length() > 0 ? Integer.parseInt(raw_quantity) : 0);
-                c.setEffort(raw_effort != null && raw_effort.length() > 0 ? Float.parseFloat(raw_effort) : 0);
+                try {
+                    String raw_quantity = request.getParameter("quantity" + pid);
+                    String raw_effort = request.getParameter("effort" + pid);
+                    c.setQuantity(raw_quantity != null && raw_quantity.length() > 0 ? Integer.parseInt(raw_quantity) : 0);
+                    c.setEffort(raw_effort != null && raw_effort.length() > 0 ? Float.parseFloat(raw_effort) : 0);
+                } catch (NumberFormatException e) {
+                    // Truyền lại thông báo lỗi và các giá trị đã nhập
+                    request.setAttribute("errorMessage", "Số lượng phải là số nguyên và effort phải là số thực");
+                    request.setAttribute("from", request.getParameter("from"));
+                    request.setAttribute("to", request.getParameter("to"));
+                    request.setAttribute("did", request.getParameter("did"));
+                    request.setAttribute("pids", pids);
+
+                    // Truy vấn lại dữ liệu từ DBContext
+                    PlanDBContext planDb = new PlanDBContext();
+                    Plan existingPlan = planDb.get(planId);
+                    request.setAttribute("plan", existingPlan);
+
+                    PlanCampaignDBContext campaignDb = new PlanCampaignDBContext();
+                    ArrayList<PlanCampain> campaigns = campaignDb.list(planId);
+                    request.setAttribute("campaigns", campaigns);
+
+                    DepartmentDBContext departmentDb = new DepartmentDBContext();
+                    ArrayList<Department> departments = departmentDb.get("workshop");
+                    request.setAttribute("depts", departments);
+
+                    ProductDBContext productDb = new ProductDBContext();
+                    ArrayList<Product> products = productDb.list();
+                    request.setAttribute("products", products);
+
+                    // Forward lại trang update.jsp với dữ liệu đã nhập và thông báo lỗi
+                    request.getRequestDispatcher("/view/productionplan/update.jsp").forward(request, response);
+                    return;
+                }
+
                 c.setPl(plan);
                 if (c.getQuantity() != 0 && c.getEffort() != 0) {
                     plan.getCampains().add(c);
@@ -99,11 +167,13 @@ public class ProductionplanUpdateController extends HttpServlet {
             }
 
             PlanDBContext db = new PlanDBContext();
-                db.update(plan);
-            
+            db.update(plan);
+
         } catch (NumberFormatException e) {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid input format");
         }
+
         response.sendRedirect("list");
     }
+
 }

@@ -35,6 +35,10 @@
                 text-align: center;
                 color: #333;
             }
+            h5 {
+                text-align: center;
+                color: red;
+            }
             form {
                 display: flex;
                 flex-direction: column;
@@ -87,6 +91,11 @@
     <body>
         <div class="form-container">
             <h1>Chỉnh Sửa Kế Hoạch Sản Xuất</h1>
+            <h5>
+                <c:if test="${not empty errorMessage}">
+                    <div class="error-message">${errorMessage}</div>
+                </c:if>
+            </h5>
             <form action="update" method="POST"> 
                 <input type="hidden" name="planId" value="${plan.id}"/>
                 
