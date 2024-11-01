@@ -15,7 +15,7 @@ public class NavigationMenuTag extends SimpleTagSupport {
                 + "<a href='home.jsp' style='color: black; padding: 12px 16px; text-decoration: none; display: block;'>Home</a>"
                 + "<a href='profile.jsp' style='color: black; padding: 12px 16px; text-decoration: none; display: block;'>Profile</a>"
                 + "<a href='settings.jsp' style='color: black; padding: 12px 16px; text-decoration: none; display: block;'>Settings</a>"
-                + "<a href='logout.jsp' style='color: black; padding: 12px 16px; text-decoration: none; display: block;'>Logout</a>"
+                + "<a href='/logout' style='color: black; padding: 12px 16px; text-decoration: none; display: block;'>Logout</a>"
                 + "</div>"
                 + "</div>"
                 + "<script>"
