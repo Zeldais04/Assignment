@@ -3,7 +3,6 @@ package controller.accesscontrol;
 
 import dal.UserDBContext;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -59,13 +58,6 @@ public class LoginController extends HttpServlet {
         response.getWriter().println(getInitParameter("private"));
     }
 
-    /** 
-     * Returns a short description of the servlet.
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
+    
 
 }
