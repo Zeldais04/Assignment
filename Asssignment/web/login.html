@@ -28,44 +28,40 @@
                 margin-bottom: 20px;
                 color: #333;
                 text-align: center;
-            }
-            .login-container label {
                 font-weight: bold;
-                margin-top: 10px;
-                display: inline-block;
             }
             .login-container input[type="text"],
             .login-container input[type="password"] {
-                width: calc(100% - 20px);
+                width: 100%;
                 padding: 10px;
-                margin: 5px 0 15px 0;
-                border: 1px solid #ddd;
+                margin: 10px 0;
+                border: 1px solid #ccc;
                 border-radius: 4px;
+                font-size: 16px;
             }
             .login-container input[type="submit"] {
                 width: 100%;
                 padding: 10px;
-                background-color: #4CAF50;
+                background-color: #009879;
                 color: #ffffff;
                 border: none;
                 border-radius: 4px;
                 cursor: pointer;
                 font-weight: bold;
                 transition: background-color 0.3s;
+                font-size: 16px;
             }
             .login-container input[type="submit"]:hover {
-                background-color: #45a049;
+                background-color: #007b68;
             }
         </style>
     </head>
     <body>
         <div class="login-container">
-            <h2>Login</h2>
+            <h2>Log in</h2>
             <form action="login" method="POST">
-                <label for="username">Username:</label>
-                <input type="text" name="username" id="username" required/> <br/>
-                <label for="password">Password:</label>
-                <input type="password" name="password" id="password" required/> <br/>
+                <input type="text" name="username" id="username" placeholder="Username" required/> <br/>
+                <input type="password" name="password" id="password" placeholder="Password" required/> <br/>
                 <input type="submit" value="Login" />
             </form>
         </div>
