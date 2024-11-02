@@ -164,6 +164,7 @@
         <div class="button-container">
             <a href="${pageContext.request.contextPath}/productionplan/list" class="back-button">Trở về</a>
             <a href="${pageContext.request.contextPath}/productionplan/update?planId=${planId}" class="edit-button">Chỉnh sửa</a>
+            <a href="${pageContext.request.contextPath}/schedule/create?planId=${planId}">Thêm lịch trình</a>
             <a href="${pageContext.request.contextPath}/productionplan/delete?planId=${planId}" class="delete-button" onclick="return confirm('Bạn có chắc muốn xóa kế hoạch này không?');">Xóa</a>
         </div>
     </body>
