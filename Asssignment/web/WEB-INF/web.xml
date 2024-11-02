@@ -12,9 +12,6 @@
         <servlet-name>ScheduleListController</servlet-name>
         <url-pattern>/schedule/list</url-pattern>
     </servlet-mapping>
-    <welcome-file-list>
-        <welcome-file>login.html</welcome-file>
-    </welcome-file-list>
     <servlet>
         <servlet-name>ProductionPlanCreate</servlet-name>
         <servlet-class>controller.productionplan.ProductionPlanCreateController</servlet-class>
@@ -83,4 +80,9 @@
         <servlet-name>EmployeeListController</servlet-name>
         <url-pattern>/employee/list</url-pattern>
     </servlet-mapping>
+    <welcome-file-list>
+        <welcome-file>loginreal.html</welcome-file>
+    </welcome-file-list>
+
+
 </web-app>

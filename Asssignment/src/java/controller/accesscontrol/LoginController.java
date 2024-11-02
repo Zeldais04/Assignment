@@ -53,7 +53,7 @@ public class LoginController extends HttpServlet {
             response.sendRedirect("home.html");
         }
         else
-            response.sendRedirect("login");
+            response.sendRedirect("login.html");
         
         response.getWriter().println(getInitParameter("private"));
     }
