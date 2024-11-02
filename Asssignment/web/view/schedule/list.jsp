@@ -13,7 +13,14 @@
     <head>
         <meta charset="UTF-8">
         <title>Schedule List</title>
+        <link rel="stylesheet" href="styles/theme.css">
         <style>
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #f4f6f9;
+                margin: 0;
+                padding: 0;
+            }
             table {
                 width: 100%;
                 border-collapse: collapse;
@@ -27,11 +34,16 @@
                 text-align: center;
             }
             th {
-                background-color: #f2f2f2;
+                background-color: #009879;
+                color: white;
             }
             .container {
                 max-width: 1200px;
-                margin: 0 auto;
+                margin: 20px auto;
+                padding: 20px;
+                background-color: #fff;
+                border-radius: 8px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             }
         </style>
     </head>
@@ -62,6 +74,5 @@
                 </tbody>
             </table>
         </div>
-
     </body>
 </html>
