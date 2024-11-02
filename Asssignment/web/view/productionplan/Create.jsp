@@ -1,4 +1,4 @@
-<%-- 
+<%--  
     Document   : Create
     Created on : Oct 30, 2024, 8:55:56 AM
     Author     : Zeldais
@@ -14,6 +14,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Styled JSP Page</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        <link rel="stylesheet" href="styles/theme.css">
         <style>
             body {
                 font-family: Arial, sans-serif;
@@ -76,7 +77,7 @@
                 display: flex;
                 justify-content: center;
             }
-            input[type="submit"] {
+            .save-button {
                 background-color: #28a745;
                 color: #fff;
                 padding: 10px 20px;
@@ -84,8 +85,10 @@
                 border-radius: 5px;
                 cursor: pointer;
                 transition: background-color 0.3s ease;
+                text-decoration: none;
+                font-size: 16px;
             }
-            input[type="submit"]:hover {
+            .save-button:hover {
                 background-color: #218838;
             }
         </style>
@@ -134,12 +137,10 @@
                 </table>
 
                 <div class="button-container">
-                    <input type="submit" name="Save" value="Save" />
+                    <input type="submit" class="save-button" name="Save" value="Save" />
                 </div>
             </form>
         </div>
-
-
 
     </body>
 
