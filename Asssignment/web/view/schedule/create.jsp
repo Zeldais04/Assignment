@@ -6,6 +6,8 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="ct" uri="http://example.com/customTags" %>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -38,6 +40,7 @@
         </style>
     </head>
     <body>
+        <ct:navigationMenu/>
         <div class="container">
             <h1>Create Schedule for Plan: ${plan.id}</h1>
             <form action="<c:url value='/schedule/create' />" method="POST">
