@@ -13,7 +13,6 @@
         <url-pattern>/schedule/list</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
-        <!-- Trang login mặc định khi ứng dụng chạy -->
         <welcome-file>login.html</welcome-file>
     </welcome-file-list>
     <servlet>
