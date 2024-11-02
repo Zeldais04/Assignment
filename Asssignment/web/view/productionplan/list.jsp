@@ -83,7 +83,8 @@
                         </tr>
                     </c:forEach>
                 </tbody>
-            </table>
+            </table>                            
         </div>
+            <a href="${pageContext.request.contextPath}/productionplan/create">Thêm Plan</a>
     </body>
 </html>
