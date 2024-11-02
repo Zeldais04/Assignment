@@ -21,7 +21,7 @@ public class ProductionPlanListController extends BaseRBACController {
         PlanDBContext db = new PlanDBContext();
         ArrayList<Plan> plans = db.list();
         request.setAttribute("plans", plans);
-        request.getRequestDispatcher("//view/productionplan/list.jsp").forward(request, response);
+        request.getRequestDispatcher("/view/productionplan/list.jsp").forward(request, response);
     }
 
     @Override
