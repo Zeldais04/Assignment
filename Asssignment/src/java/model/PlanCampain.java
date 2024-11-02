@@ -1,12 +1,13 @@
-
 package model;
 
 /**
  * Daitqhe182481
+ *
  * @author Zeldais
  */
 public class PlanCampain {
-private int id;
+
+    private int id;
     private Plan pl;
     private Product p;
     private int quantity;
@@ -51,5 +52,5 @@ private int id;
     public void setEffort(float effort) {
         this.effort = effort;
     }
-    
+
 }
