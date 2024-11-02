@@ -77,7 +77,24 @@ public class ScheduleDBContext extends DBContext<Schedule> {
 
     @Override
     public ArrayList<Schedule> list() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        ArrayList<Schedule> schedules = new ArrayList<>();
+        try {
+            String sql = "SELECT scid, camid, date, shift, quantity FROM [dbo].[ScheduleCampaign]";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Schedule s = new Schedule();
+                s.setId(rs.getInt("scid"));
+                s.setId(rs.getInt("camid"));
+                s.setDate(rs.getDate("date"));
+                s.setShift(rs.getString("shift"));
+                s.setQuantity(rs.getInt("quantity"));
+                schedules.add(s);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ScheduleDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return schedules;
     }
 
     @Override
