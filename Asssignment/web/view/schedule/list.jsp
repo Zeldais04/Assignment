@@ -6,58 +6,61 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="ct" uri="http://example.com/customTags" %>
+
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
-    <title>Schedule List</title>
-    <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-        }
-        table, th, td {
-            border: 1px solid #ddd;
-        }
-        th, td {
-            padding: 10px;
-            text-align: center;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1>Schedule List</h1>
-        <table>
-            <thead>
-                <tr>
-                    <th>SCID</th>
-                    <th>Campaign ID</th>
-                    <th>Date</th>
-                    <th>Shift</th>
-                    <th>Quantity</th>
-                </tr>
-            </thead>
-            <tbody>
-                <c:forEach items="${schedules}" var="s">
+    <head>
+        <meta charset="UTF-8">
+        <title>Schedule List</title>
+        <style>
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                margin: 20px 0;
+            }
+            table, th, td {
+                border: 1px solid #ddd;
+            }
+            th, td {
+                padding: 10px;
+                text-align: center;
+            }
+            th {
+                background-color: #f2f2f2;
+            }
+            .container {
+                max-width: 1200px;
+                margin: 0 auto;
+            }
+        </style>
+    </head>
+    <body>
+        <ct:navigationMenu/>
+        <div class="container">
+            <h1>Schedule List</h1>
+            <table>
+                <thead>
                     <tr>
-                        <td>${s.id}</td>
-                        <td>${s.cam.id}</td>
-                        <td>${s.date}</td>
-                        <td>${s.shift}</td>
-                        <td>${s.quantity}</td>
+                        <th>SCID</th>
+                        <th>Campaign ID</th>
+                        <th>Date</th>
+                        <th>Shift</th>
+                        <th>Quantity</th>
                     </tr>
-                </c:forEach>
-            </tbody>
-        </table>
-    </div>
-</body>
+                </thead>
+                <tbody>
+                    <c:forEach items="${schedules}" var="s">
+                        <tr>
+                            <td>${s.id}</td>
+                            <td>${s.cam.id}</td>
+                            <td>${s.date}</td>
+                            <td>${s.shift}</td>
+                            <td>${s.quantity}</td>
+                        </tr>
+                    </c:forEach>
+                </tbody>
+            </table>
+        </div>
+    </body>
 </html>
