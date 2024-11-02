@@ -12,6 +12,7 @@
 <html>
     <head>
         <title>Chi Tiết Kế Hoạch Sản Xuất - Chiến Dịch Sản Xuất</title>
+        <link rel="stylesheet" href="styles/theme.css">
         <style>
             /* Giữ lại phong cách bảng từ trước để tạo cảm giác thống nhất */
             body {
@@ -43,7 +44,7 @@
                 border-bottom: 1px solid #ddd;
             }
             th {
-                background-color: #4CAF50;
+                background-color: #009879;
                 color: white;
                 font-weight: bold;
             }
@@ -53,74 +54,47 @@
             tr:hover {
                 background-color: #ddd;
             }
-            .back-button {
-                display: inline-block;
-                padding: 10px 20px;
-                font-size: 16px;
-                text-align: center;
-                background-color: #4CAF50;
-                color: white;
-                text-decoration: none;
-                border-radius: 5px;
-                margin-bottom: 20px;
-            }
-            .back-button {
-                display: inline-block;
-                padding: 10px 20px;
-                font-size: 16px;
-                text-align: center;
-                background-color: #4CAF50;
-                color: white;
-                text-decoration: none;
-                border-radius: 5px;
-                margin-bottom: 20px;
-            }
-            .back-button:hover {
-                background-color: #45a049;
-            }
             .button-container {
                 text-align: right;
                 margin-bottom: 20px;
             }
             .details {
-                justify-content: center;
                 text-align: center;
                 margin-bottom: 20px;
             }
-            .back-button, .edit-button, .delete-button {
+            .back-button, .edit-button, .delete-button, .add-button {
                 display: inline-block;
                 padding: 10px 20px;
                 font-size: 16px;
                 text-align: center;
-                background-color: #4CAF50;
                 color: white;
                 text-decoration: none;
                 border-radius: 5px;
-                margin-bottom: 20px;
                 margin-right: 10px;
             }
+            .back-button {
+                background-color: #4CAF50;
+            }
+            .back-button:hover {
+                background-color: #45a049;
+            }
             .edit-button {
-                background-color: #FFA500; /* Màu cam để phân biệt nút "Chỉnh sửa" */
+                background-color: #FFA500;
             }
             .edit-button:hover {
                 background-color: #FF8C00;
             }
             .delete-button {
-                background-color: #FF0000; /* Màu đỏ để nhấn mạnh nút "Xóa" */
+                background-color: #FF0000;
             }
             .delete-button:hover {
                 background-color: #C70000;
             }
-            .back-button:hover {
-                background-color: #45a049;
+            .add-button {
+                background-color: #007BFF;
             }
-            .button-container {
-                text-align: right;
-                margin-bottom: 20px;
-            }
-            .details {
-                text-align: center;
-                margin-bottom: 20px;
+            .add-button:hover {
+                background-color: #0056b3;
             }
         </style>
     </head>
@@ -131,7 +105,6 @@
         <div class="details">
             <p><strong>Thời gian bắt đầu:</strong> <c:out value="${plan.startTime}"/>
                 <strong>Thời gian kết thúc:</strong> <c:out value="${plan.endTime}"/></p>
-
         </div>
         <ct:navigationMenu/>
         <div class="table-container">
@@ -164,9 +137,8 @@
         <div class="button-container">
             <a href="${pageContext.request.contextPath}/productionplan/list" class="back-button">Trở về</a>
             <a href="${pageContext.request.contextPath}/productionplan/update?planId=${planId}" class="edit-button">Chỉnh sửa</a>
-            <a href="${pageContext.request.contextPath}/schedule/create?planId=${planId}">Thêm lịch trình</a>
+            <a href="${pageContext.request.contextPath}/schedule/create?planId=${planId}" class="add-button">Thêm lịch trình</a>
             <a href="${pageContext.request.contextPath}/productionplan/delete?planId=${planId}" class="delete-button" onclick="return confirm('Bạn có chắc muốn xóa kế hoạch này không?');">Xóa</a>
         </div>
     </body>
 </html>
-
