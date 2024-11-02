@@ -62,5 +62,7 @@
                 </tbody>
             </table>
         </div>
+        <a href="${pageContext.request.contextPath}/schedule/create">Thêm lịch trình</a>
+
     </body>
 </html>
