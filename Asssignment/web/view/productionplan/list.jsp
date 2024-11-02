@@ -12,6 +12,7 @@
 <html>
     <head>
         <title>Danh sách Kế hoạch Sản xuất</title>
+        <link rel="stylesheet" href="styles/theme.css">
         <style>
             body {
                 font-family: Arial, sans-serif;
@@ -42,7 +43,7 @@
                 border-bottom: 1px solid #ddd;
             }
             th {
-                background-color: #4CAF50;
+                background-color: #009879;
                 color: white;
                 font-weight: bold;
             }
@@ -57,6 +58,23 @@
                 font-size: 14px;
                 text-align: center;
                 margin-top: 10px;
+            }
+            .add-plan-button {
+                display: inline-block;
+                background-color: #007BFF;
+                color: white;
+                padding: 10px 20px;
+                text-align: center;
+                border-radius: 5px;
+                text-decoration: none;
+                margin-top: 20px;
+                transition: background-color 0.3s;
+            }
+            .add-plan-button:hover {
+                background-color: #0056b3;
+            }
+            .button-container{
+                text-align: end;
             }
         </style>
     </head>
@@ -79,12 +97,14 @@
                             <td><c:out value="${plan.id}"/></td>
                             <td><c:out value="${plan.startTime}"/></td>
                             <td><c:out value="${plan.endTime}"/></td>
-                            <td><a href="${pageContext.request.contextPath}/plancampain/list?planId=${plan.id}">Xem Chi Tiết</a></td>
+                            <td><a href="${pageContext.request.contextPath}/plancampain/list?planId=${plan.id}" class="add-plan-button">Xem Chi Tiết</a></td>
                         </tr>
                     </c:forEach>
                 </tbody>
             </table>                            
         </div>
-            <a href="${pageContext.request.contextPath}/productionplan/create">Thêm Plan</a>
+        <div class="button-container">
+            <a href="${pageContext.request.contextPath}/productionplan/create" class="add-plan-button">Thêm Plan</a>
+        </div>
     </body>
 </html>
