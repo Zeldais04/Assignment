@@ -18,7 +18,7 @@
         <style>
             body {
                 font-family: Arial, sans-serif;
-                background-color: #f5f5f5;
+                background-color: #f4f6f9;
                 margin: 0;
                 padding: 0;
                 display: flex;
@@ -53,7 +53,7 @@
             input[type="date"], select, input[type="text"] {
                 padding: 10px;
                 margin-top: 5px;
-                border: 1px solid #ccc;
+                border: 1px solid #ddd;
                 border-radius: 5px;
                 font-size: 1em;
             }
@@ -70,7 +70,15 @@
                 text-align: center;
             }
             th {
-                background-color: #f0f0f0;
+                background-color: #009879;
+                color: white;
+                font-weight: bold;
+            }
+            tr:nth-child(even) {
+                background-color: #f2f2f2;
+            }
+            tr:hover {
+                background-color: #ddd;
             }
             .button-container {
                 margin-top: 20px;
@@ -78,7 +86,7 @@
                 justify-content: center;
             }
             .save-button {
-                background-color: #28a745;
+                background-color: #007BFF;
                 color: #fff;
                 padding: 10px 20px;
                 border: none;
@@ -89,7 +97,7 @@
                 font-size: 16px;
             }
             .save-button:hover {
-                background-color: #218838;
+                background-color: #0056b3;
             }
         </style>
     </head>
