@@ -53,10 +53,10 @@
             <h1>Schedule List</h1>
             <table>
                 <thead>
-                    <tr>
+                    <tr>        
+                        <th>Date</th>
                         <th>SCID</th>
                         <th>Campaign ID</th>
-                        <th>Date</th>
                         <th>Shift</th>
                         <th>Quantity</th>
                     </tr>
@@ -64,9 +64,10 @@
                 <tbody>
                     <c:forEach items="${schedules}" var="s">
                         <tr>
+                            <td>${s.date}</td>
+
                             <td>${s.id}</td>
                             <td>${s.cam.id}</td>
-                            <td>${s.date}</td>
                             <td>${s.shift}</td>
                             <td>${s.quantity}</td>
                         </tr>
