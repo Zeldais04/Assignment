@@ -85,7 +85,9 @@ public class ScheduleDBContext extends DBContext<Schedule> {
             while (rs.next()) {
                 Schedule s = new Schedule();
                 s.setId(rs.getInt("scid"));
-                s.setId(rs.getInt("camid"));
+                PlanCampain pc = new PlanCampain();
+                pc.setId(rs.getInt("camid"));
+                s.setCam(pc);
                 s.setDate(rs.getDate("date"));
                 s.setShift(rs.getString("shift"));
                 s.setQuantity(rs.getInt("quantity"));
