@@ -103,7 +103,7 @@
                 </tbody>
             </table>                            
         </div>
-        <div class="button-container">
+        <div class="button-container" style='position: fixed; right: 10px; bottom: 10px; display: inline-block;'>
             <a href="${pageContext.request.contextPath}/productionplan/create" class="add-plan-button">Thêm Plan</a>
         </div>
     </body>
