@@ -23,7 +23,7 @@ public class FormatDate extends SimpleTagSupport {
     public void doTag() throws JspException, IOException {
         if (value != null) {
             // Định dạng ngày tháng theo kiểu tiếng Việt
-            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            java.text.SimpleDateFormat dateFormat = new java.text.SimpleDateFormat("'Ngày' dd 'Tháng' MM 'Năm' yyyy");
             String formattedDate = dateFormat.format(value);
 
             // Xuất kết quả ra trang JSP
@@ -31,5 +31,5 @@ public class FormatDate extends SimpleTagSupport {
             out.print(formattedDate);
         }
     }
-    
+
 }
