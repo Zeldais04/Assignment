@@ -95,8 +95,8 @@
                     <c:forEach var="plan" items="${plans}">
                         <tr>
                             <td><c:out value="${plan.id}"/></td>
-                            <td><c:out value="${plan.startTime}"/></td>
-                            <td><c:out value="${plan.endTime}"/></td>
+                            <td><ct:formatDate value="${plan.startTime}"/></td>
+                            <td><ct:formatDate value="${plan.endTime}"/></td>
                             <td><a href="${pageContext.request.contextPath}/plancampain/list?planId=${plan.id}" class="add-plan-button">Xem Chi Tiết</a></td>
                         </tr>
                     </c:forEach>

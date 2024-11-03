@@ -64,8 +64,7 @@
                 <tbody>
                     <c:forEach items="${schedules}" var="s">
                         <tr>
-                            <td>${s.date}</td>
-
+                            <td><ct:formatDate value="${s.date}"/></td>
                             <td>${s.id}</td>
                             <td>${s.cam.id}</td>
                             <td>${s.shift}</td>

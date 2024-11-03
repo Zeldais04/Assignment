@@ -103,8 +103,8 @@
 
         <!-- Hiển thị thông tin chi tiết về thời gian của kế hoạch sản xuất -->
         <div class="details">
-            <p><strong>Thời gian bắt đầu:</strong> <c:out value="${plan.startTime}"/>
-                <strong>Thời gian kết thúc:</strong> <c:out value="${plan.endTime}"/></p>
+            <p><strong>Thời gian bắt đầu:</strong> <ct:formatDate value="${plan.startTime}"/>
+                <strong>Thời gian kết thúc:</strong> <ct:formatDate value="${plan.endTime}"/></p>
         </div>
         <ct:navigationMenu/>
         <div class="table-container">

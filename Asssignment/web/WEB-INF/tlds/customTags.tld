@@ -13,4 +13,15 @@
     <tag-class>NavigationMenuTag</tag-class>
     <body-content>empty</body-content>
   </tag>
+  <tag>
+    <name>formatDate</name>
+    <tag-class>com.example.FormatDate</tag-class>
+    <body-content>empty</body-content>
+        <attribute>
+            <name>value</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.sql.Date</type>
+        </attribute>
+  </tag>
 </taglib>
