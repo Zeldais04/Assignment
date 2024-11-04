@@ -5,7 +5,7 @@ import jakarta.servlet.jsp.JspWriter;
 import jakarta.servlet.jsp.tagext.SimpleTagSupport;
 import java.io.IOException;
 import java.sql.Date;
-
+import java.text.SimpleDateFormat;
 /**
  *
  * @author Zeldais
@@ -22,7 +22,7 @@ public class FormatDate extends SimpleTagSupport {
     public void doTag() throws JspException, IOException {
         if (value != null) {
             // Định dạng ngày tháng theo kiểu tiếng Việt
-            java.text.SimpleDateFormat dateFormat = new java.text.SimpleDateFormat("'Ngày' dd 'Tháng' MM 'Năm' yyyy");
+            SimpleDateFormat dateFormat = new java.text.SimpleDateFormat("'Ngày' dd 'Tháng' MM 'Năm' yyyy");
             String formattedDate = dateFormat.format(value);
 
             // Xuất kết quả ra trang JSP
